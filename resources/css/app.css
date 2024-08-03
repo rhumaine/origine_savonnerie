@@ -1,0 +1,97 @@
+@tailwind base;
+@tailwind components;
+/*@tailwind utilities;*/
+
+
+body{
+    background-color: #e4d1cb;
+}
+
+/* NAVIGATION */
+#navbarNav .navbar {
+    display: flex; /* Utilise Flexbox pour positionner les éléments */
+    justify-content: space-between; /* Espace entre les menus pour alignement */
+    align-items: center; /* Centre verticalement les éléments */
+    padding: 10px 20px; /* Espacement autour de la navbar */
+    width: 100%;
+}
+
+.navbar-nav {
+    list-style: none; /* Supprime les puces des listes */
+    padding: 0;
+    margin: 0;
+    display: flex; /* Affiche les éléments en ligne */
+}
+
+.nav-item {
+    margin: 0 15px; /* Espacement entre les éléments de la liste */
+}
+
+.nav-link {
+    text-decoration: none; /* Supprime le soulignement des liens */
+    font-weight: bold; /* Rend le texte des liens en gras */
+}
+
+.nav-link:hover {
+    text-decoration: underline; /* Ajoute un soulignement au survol */
+}
+
+/* Styles spécifiques pour le menu centré */
+.center-menu {
+    flex: 1; /* Permet au menu centré de prendre tout l'espace disponible */
+    justify-content: center; /* Centre les éléments de la liste */
+}
+
+/* Styles spécifiques pour le menu à droite */
+.right-menu {
+    margin-left: auto; /* Pousse le menu à l'extrême droite */
+}
+
+
+a:hover{
+    color:#000
+}
+
+.image-container {
+    overflow: hidden; /* Masque toute partie de l'image qui dépasse */
+}
+
+.zoomable-image {
+    transition: transform 0.3s ease; /* Transition douce pour le zoom */
+    width: 100%; /* Assure que l'image remplit le conteneur */
+    height: auto; /* Maintient le ratio d'aspect de l'image */
+}
+
+.zoomable-image:hover {
+    transform: scale(1.1); /* Applique un zoom de 10% à l'image */
+}
+
+
+
+/* FOOTER */
+footer {
+    background-color: #0000006b; /* Couleur de fond du footer */
+    padding: 20px 0; /* Espacement autour du contenu du footer */
+    text-align: center; /* Centrer le texte et les éléments à l'intérieur */
+}
+
+.footer-menu ul {
+    list-style-type: none; /* Supprime les puces des listes */
+    padding: 0;
+    margin: 0;
+    display: inline-block; /* Rend la liste inline pour la centrer */
+}
+
+.footer-menu li {
+    display: inline; /* Afficher les éléments de la liste sur une seule ligne */
+    margin: 0 15px; /* Espace horizontal entre les éléments */
+}
+
+.footer-menu a {
+    text-decoration: none; /* Supprime la soulignement des liens */
+    color: #fff; /* Couleur des liens */
+}
+
+.footer-menu a:hover {
+    text-decoration: underline; /* Ajouter une soulignement au survol */
+}
