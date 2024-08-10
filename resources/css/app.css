@@ -68,6 +68,86 @@ a:hover{
 
 
 
+/* PAGE DETAIL PRODUIT */
+.product-detail {
+    display: flex;
+    margin: 20px;
+}
+
+.product-image img {
+    width: 600px;
+    height: auto;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.product-info {
+    margin: 0 auto;
+    width: 40%;
+}
+
+.product-info .name{
+    font-size: 6em;
+}
+
+.description {
+    margin-top: 10px;
+    color: #666;
+}
+
+.price {
+    margin-top: 30px;
+    font-size: 24px;
+    color: #333;
+}
+
+.taxe{
+    margin-top: 10px;
+    font-size: 0.8em;
+}
+
+.quantity-input{
+    display: flex;
+    position: relative;
+    width: 130px;
+    height: 50px;
+    border:1px solid #000;
+    margin-top: 30px;
+    border-radius: 4px;
+    
+}
+.quantity_button{
+    margin-top: 0px;
+    color:#000;
+}
+.quantity_input{
+    padding:0;
+    text-align: center;
+    width: 30px;
+    border:none;
+    background: none;
+}
+
+.add_panier{
+    width: 100%;
+    border: 1px solid #000;
+    background-color: #fff;
+    color:#000;
+    transition: box-shadow 0.3s ease;
+}
+
+button {
+    padding: 10px 20px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.add_panier:hover {
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.8);
+}
+
+
+
 /* FOOTER */
 footer {
     background-color: #0000006b; /* Couleur de fond du footer */

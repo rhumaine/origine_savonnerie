@@ -3,6 +3,7 @@
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProduitsController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
@@ -21,6 +22,8 @@ Route::get('/confidentialite', function () {
 
 // FIN FOOTER
 
+// PRODUITS
+Route::get('/produits/{id}', [ProduitsController::class, 'show']);
 
 Route::get('/panier', function () {
     return view('panier');
