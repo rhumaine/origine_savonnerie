@@ -25,11 +25,6 @@
     <body class="font-sans antialiased">
         <div class="page-wrapper">
             @include('partials.header')
-
-            @auth 
-                @include('layouts.navigation')
-            @endauth
-
             
             <div class="main">
                 <div class="flex flex-col items-center justify-center">

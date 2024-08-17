@@ -9,6 +9,12 @@ Route::get('/test-panier', [App\Http\Controllers\PanierController::class, 'testP
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
+
+Route::get('/a-propos', function () {
+    return view('a-propos');
+})->name('a-propos');
+
+
 // FOOTER
 Route::get('/conditions', function () {
     return view('conditions');
@@ -21,6 +27,7 @@ Route::get('/mentions', function () {
 Route::get('/confidentialite', function () {
     return view('confidentialite');
 })->name('confidentialite');
+
 
 // FIN FOOTER
 
