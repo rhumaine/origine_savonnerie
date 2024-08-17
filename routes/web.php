@@ -4,6 +4,8 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProduitsController;
+use App\Http\Controllers\PanierController;
+Route::get('/test-panier', [App\Http\Controllers\PanierController::class, 'testPanier']);
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
@@ -25,10 +27,10 @@ Route::get('/confidentialite', function () {
 // PRODUITS
 Route::get('/produits/{id}', [ProduitsController::class, 'show']);
 
-Route::get('/panier', function () {
-    return view('panier');
-})->name('panier');
+Route::get('/panier', [PanierController::class, 'show'])->name('panier.show');
+Route::post('/panier/vider', [PanierController::class, 'vider'])->name('panier.vider');
 
+Route::post('/panier/ajouter/{id}', [PanierController::class, 'ajouter'])->name('panier.ajouter');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

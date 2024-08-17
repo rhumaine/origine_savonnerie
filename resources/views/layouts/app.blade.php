@@ -23,31 +23,30 @@
         @vite(['resources/css/app.css'])
     </head>
     <body class="font-sans antialiased">
-        @include('partials.header')
+        <div class="page-wrapper">
+            @include('partials.header')
 
-        @auth 
-            @include('layouts.navigation')
-        @endauth
+            @auth 
+                @include('layouts.navigation')
+            @endauth
 
-        
-        <div class="">
-            <div class="flex flex-col items-center justify-center">
-                <div class="container">
-                @yield('content')
+            
+            <div class="main">
+                <div class="flex flex-col items-center justify-center">
+                    <div class="container">
+                    @yield('content')
 
-                @if (isset($slot) && $slot != null )
-                    {{ $slot }}
-                @endif
+                    @if (isset($slot) && $slot != null )
+                        {{ $slot }}
+                    @endif
+                    </div>
                 </div>
             </div>
+
+            @include('partials.footer')
         </div>
-
-
-        @include('partials.footer')
-
-
-         <!-- Inclure Bootstrap JS via CDN -->
-         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-         @vite(['resources/js/app.js'])
+            <!-- Inclure Bootstrap JS via CDN -->
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+            @vite(['resources/js/app.js'])
     </body>
 </html>
