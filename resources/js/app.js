@@ -7,7 +7,7 @@ window.Alpine = Alpine;
 Alpine.start();
 
 window.changeQuantity = function(amount) {
-    const input = document.getElementById('quantity');
+    const input = document.getElementById('quantite');
     if (input) {
         const currentValue = parseInt(input.value, 10);
         const newValue = currentValue + amount;

@@ -6,6 +6,14 @@
 body{
     background-color: #e4d1cb;
 }
+.page-wrapper {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+.main{
+    flex:1;
+}
 
 /* NAVIGATION */
 #navbarNav .navbar {
@@ -147,7 +155,74 @@ button {
 }
 
 
+/*  PANIER */
+.panierName {
+    font-size: 4em;
+}
+.containerPanier {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+}
 
+.containerPanier .table-container {
+    flex: 2; /* Occupe plus d'espace */
+    margin-right: 20px;
+}
+
+.containerPanier .summary-container {
+    flex: 0.5; /* Occupe moins d'espace */
+    border: 1px solid #ddd;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.containerPanier table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.containerPanier th, .containerPanier td {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+.containerPanier th {
+    background-color: #f4f4f4;
+}
+
+.containerPanier .total {
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+.containerPanier .btn {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 1em;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    width: 100%;
+}
+
+.containerPanier .btn:hover {
+    background-color: #0056b3;
+}
+
+.containerPanier .btn-danger {
+    background-color: #dc3545;
+}
+
+.containerPanier .btn-danger:hover {
+    background-color: #c82333;
+}
 /* FOOTER */
 footer {
     background-color: #0000006b; /* Couleur de fond du footer */
