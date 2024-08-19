@@ -18,6 +18,10 @@ body{
 header {
     margin-bottom: 50px;
 }
+
+h3{
+    font-size: 2em;
+}
 /* NAVIGATION */
 #navbarNav .navbar {
     display: flex; /* Utilise Flexbox pour positionner les éléments */
@@ -98,7 +102,8 @@ a:hover{
 }
 
 .product-info .name{
-    font-size: 5em;
+    font-size: 4em;
+    white-space: nowrap;
 }
 
 .description {

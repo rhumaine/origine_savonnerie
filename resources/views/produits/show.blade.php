@@ -4,7 +4,7 @@
 @section('title', 'Détails du Produit')
 
 @section('content')
-        <section class="product-detail">
+        <section class="product-detail mb-5">
             <div class="product-image">
 
                 @if($produit->url_image)
@@ -16,9 +16,9 @@
 
             </div>
             <div class="product-info">
-                <h2 class="name">{{ $produit->nom }}</h2>
+                <h2 class="name">{{ Str::upper($produit->nom) }}</h2>
                 <p class="description text-center"> {!! nl2br(e($produit->description)) !!}</p>
-                <p class="price">{{ $produit->prix }} €</p>
+                <p class="price">{{ $produit->prix }} € TTC</p>
                 <p class="taxe">Taxes incluses. Frais d'expédition calculés à l'étape de paiement.</p>
 
                 <form action="{{ route('panier.ajouter', $produit->id) }}" method="POST">
@@ -48,23 +48,15 @@
             </div>
         </section>
 
-        <div class="flex flex-wrap justify-content-around pt-5">
-            @foreach($produits as $produit)
-                <div class="card mb-5" style="width: 18rem;">
-                    <a href="{{ url('/produits/'.$produit->id) }}">
-                        <div class="image-container">
-                        @if($produit->url_image)
-                            <img class="card-img-top zoomable-image" style="width:300px;height:400px" src="{{ asset('images/produits/' . $produit->url_image) }}" alt="{{ $produit->nom }}">
-                        @else
-                            <img class="card-img-top zoomable-image" style="width:300px;height:400px" src="{{ asset('images/produits/300x400.png') }}" alt="Image par défault">
-                        @endif
-                        </div>
-                        <div class="card-body">
-                            <p class="card-text text-center">{{ $produit->nom }}</p>
-                            <p class="card-text text-center">{{ $produit->prix }} €</p>
-                        </div>
-                    </a>
-                </div>
-            @endforeach
-        </div>
+        <section class="mb-5">
+            <h3 class="text-center mb-3">Conseils d'utilisation : </h3>
+            <p class="text-center">Humidifier la peau et le savon, faire mousser, se laver puis rincer abondamment.</p>
+            <p class="text-center">Les savons peuvent être utilisés pour l’hygiène des mains, du corps, du visage, de manière quotidienne. Lorsque vous avez commencé à vous en servir, pensez à le rincer après chaque utilisation et le conserver au sec entre deux utilisations, soit sur le porte savon en aimanté soit dans le sac en sisal.</p>
+            <p class="text-center"> Ne pas ingérer ou mettre dans les yeux. Ne pas utiliser sur une plaie ouverte.</p>
+        </section>
+
+        <section>
+            <h3 class="text-center">Retrouvez nos autres produits</h3>
+            @include('partials.products')
+        </section>
 @endsection
