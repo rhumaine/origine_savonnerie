@@ -5,15 +5,18 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProduitsController;
 use App\Http\Controllers\PanierController;
-Route::get('/test-panier', [App\Http\Controllers\PanierController::class, 'testPanier']);
+use App\Http\Controllers\ContactController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
-
 
 Route::get('/a-propos', function () {
     return view('a-propos');
 })->name('a-propos');
 
+//CONTACT
+Route::get('/contact', [ContactController::class, 'show'])->name('contact.show');
+Route::post('/contact', [ContactController::class, 'submit'])->name('contact.submit');
+//FIN CONTACT
 
 // FOOTER
 Route::get('/conditions', function () {
@@ -27,17 +30,16 @@ Route::get('/mentions', function () {
 Route::get('/confidentialite', function () {
     return view('confidentialite');
 })->name('confidentialite');
-
-
 // FIN FOOTER
 
 // PRODUITS
 Route::get('/produits/{id}', [ProduitsController::class, 'show']);
-
 Route::get('/panier', [PanierController::class, 'show'])->name('panier.show');
 Route::post('/panier/vider', [PanierController::class, 'vider'])->name('panier.vider');
-
 Route::post('/panier/ajouter/{id}', [PanierController::class, 'ajouter'])->name('panier.ajouter');
+// FIN PRODUITS
+
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');

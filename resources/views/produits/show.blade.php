@@ -49,14 +49,14 @@
         </section>
 
         <section class="mb-5">
-            <h3 class="text-center mb-3">Conseils d'utilisation : </h3>
+            <h2 class="text-center mb-3">Conseils d'utilisation : </h2>
             <p class="text-center">Humidifier la peau et le savon, faire mousser, se laver puis rincer abondamment.</p>
             <p class="text-center">Les savons peuvent être utilisés pour l’hygiène des mains, du corps, du visage, de manière quotidienne. Lorsque vous avez commencé à vous en servir, pensez à le rincer après chaque utilisation et le conserver au sec entre deux utilisations, soit sur le porte savon en aimanté soit dans le sac en sisal.</p>
             <p class="text-center"> Ne pas ingérer ou mettre dans les yeux. Ne pas utiliser sur une plaie ouverte.</p>
         </section>
 
         <section>
-            <h3 class="text-center">Retrouvez nos autres produits</h3>
+            <h2 class="text-center">Retrouvez nos autres produits</h2>
             @include('partials.products')
         </section>
 @endsection
