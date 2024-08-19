@@ -315,3 +315,16 @@ footer {
 .footer-menu a:hover {
     text-decoration: underline; /* Ajouter une soulignement au survol */
 }
+
+/* CONNEXION*/
+.connexion{
+    width: 300px;
+    border: 1px solid #000;
+    border-radius: 15px;
+    padding: 15px;
+    margin: 0 auto;
+    background-color: #fff;
+}
+.connexion button[type="submit"]{
+    background-color: #000;
+}
