@@ -328,3 +328,36 @@ footer {
 .connexion button[type="submit"]{
     background-color: #000;
 }
+
+/* MODAL*/
+.modal-content {
+    display: flex;
+    flex-direction: row;
+}
+.modal-body {
+    display: flex;
+    flex-direction: row;
+}
+.modal-section {
+    flex: 1;
+    padding: 20px;
+}
+.modal-left {
+    border-right: 1px solid #ddd;
+}
+.modal-right {
+    border-left: 1px solid #ddd;
+}
+.modal .btn{
+    padding: 10px 20px;
+    font-size: 1em;
+    color: #000;
+    background-color: #e4d1cb;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    width: 50%;
+    margin: 0 auto;
+}
