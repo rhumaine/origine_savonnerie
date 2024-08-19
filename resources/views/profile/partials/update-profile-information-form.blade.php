@@ -23,6 +23,13 @@
             <x-input-error class="mt-2" :messages="$errors->get('name')" />
         </div>
 
+        <!-- prenom -->
+        <div>
+            <x-input-label for="prenom" :value="__('Prénom')" />
+            <x-text-input id="prenom" class="block mt-1 w-full" type="text" name="prenom" :value="old('prenom', $user->prenom)" />
+            <x-input-error :messages="$errors->get('prenom')" class="mt-2" />
+        </div>
+
         <div>
             <x-input-label for="email" :value="__('Email')" />
             <x-text-input id="email" name="email" type="email" class="mt-1 block w-full" :value="old('email', $user->email)" required autocomplete="username" />
@@ -45,6 +52,27 @@
                     @endif
                 </div>
             @endif
+        </div>
+
+         <!-- telephone -->
+         <div>
+            <x-input-label for="telephone" :value="__('Télephone')" />
+            <x-text-input id="telephone" class="block mt-1 w-full" type="tel" name="telephone" pattern="^\+?[0-9\s\-\(\)]*$" :value="old('telephone', $user->telephone)" title="Veuillez entrer un numéro de téléphone valide" />
+            <x-input-error :messages="$errors->get('telephone')" class="mt-2" />
+        </div>
+
+        <!-- Adresse -->
+        <div>
+            <x-input-label for="address" :value="__('Adresse')" />
+            <textarea id="address" class="block mt-1 w-full" name="address">{{ old('address', $user->address) }}</textarea>
+            <x-input-error :messages="$errors->get('address')" class="mt-2" />
+        </div>
+
+        <!-- Date de naissance -->
+        <div>
+            <x-input-label for="date_naissance" :value="__('Date de naissance')" />
+            <x-text-input id="date_naissance" class="block mt-1 w-full" type="date" name="date_naissance" :value="old('date_naissance', $user->date_naissance)" />
+            <x-input-error :messages="$errors->get('date_naissance')" class="mt-2" />
         </div>
 
         <div class="flex items-center gap-4">

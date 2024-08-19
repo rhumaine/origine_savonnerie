@@ -16,6 +16,19 @@
 
             </div>
             <div class="product-info">
+
+                @if (session('success'))
+                <div class="alert alert-success mt-3">
+                    {{ session('success') }}
+                </div>
+                @endif
+
+                @if (session('error'))
+                    <div class="alert alert-error mt-3">
+                        {{ session('error') }}
+                    </div>
+                @endif
+                
                 <h2 class="name">{{ Str::upper($produit->nom) }}</h2>
                 <p class="description text-center"> {!! nl2br(e($produit->description)) !!}</p>
                 <p class="price">{{ $produit->prix }} € TTC</p>
@@ -33,18 +46,6 @@
                     <!-- Ajouter des boutons ou des formulaires pour acheter, ajouter au panier, etc. -->
                     <button class="add_panier" type="submit">Ajouter au panier</button>
                 </form>
-
-                @if (session('success'))
-                    <div class="alert alert-success mt-3">
-                        {{ session('success') }}
-                    </div>
-                @endif
-
-                @if (session('error'))
-                    <div class="alert alert-error mt-3">
-                        {{ session('error') }}
-                    </div>
-                @endif
             </div>
         </section>
 

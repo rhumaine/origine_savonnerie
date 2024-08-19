@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProduitsController;
 use App\Http\Controllers\PanierController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\OrderSummaryController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
@@ -37,6 +38,9 @@ Route::get('/produits/{id}', [ProduitsController::class, 'show']);
 Route::get('/panier', [PanierController::class, 'show'])->name('panier.show');
 Route::post('/panier/vider', [PanierController::class, 'vider'])->name('panier.vider');
 Route::post('/panier/ajouter/{id}', [PanierController::class, 'ajouter'])->name('panier.ajouter');
+
+Route::get('/checkout/summary', [OrderSummaryController::class, 'show'])->name('recap.show');
+Route::post('/checkout/payment', [OrderSummaryController::class, 'payment'])->name('checkout.payment');
 // FIN PRODUITS
 
 

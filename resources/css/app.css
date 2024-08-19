@@ -290,30 +290,29 @@ button {
 /* FIN CONTACT*/
 /* FOOTER */
 footer {
-    background-color: #0000006b; /* Couleur de fond du footer */
-    padding: 20px 0; /* Espacement autour du contenu du footer */
-    text-align: center; /* Centrer le texte et les éléments à l'intérieur */
+    background-color: #0000006b; 
+    padding: 20px 0; 
 }
 
 .footer-menu ul {
-    list-style-type: none; /* Supprime les puces des listes */
+    list-style-type: none; 
     padding: 0;
     margin: 0;
-    display: inline-block; /* Rend la liste inline pour la centrer */
+    display: inline-block; 
 }
 
 .footer-menu li {
-    display: inline; /* Afficher les éléments de la liste sur une seule ligne */
-    margin: 0 15px; /* Espace horizontal entre les éléments */
+    display: inline; 
+    margin: 0 15px; 
 }
 
 .footer-menu a {
-    text-decoration: none; /* Supprime la soulignement des liens */
-    color: #fff; /* Couleur des liens */
+    text-decoration: none; 
+    color: #fff; 
 }
 
 .footer-menu a:hover {
-    text-decoration: underline; /* Ajouter une soulignement au survol */
+    text-decoration: underline; 
 }
 
 /* CONNEXION*/

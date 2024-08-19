@@ -1,0 +1,65 @@
+@extends('layouts.app')
+
+@section('title', 'Détails du Produit')
+
+@section('content')
+
+    <h1 class="panierName">Votre récapitulatif</h1>
+
+    @if(session('success'))
+        <p>{{ session('success') }}</p>
+    @endif
+
+    @if(session('error'))
+        <p>{{ session('error') }}</p>
+    @endif
+    
+    <h2>Vos produits</h2>
+    <div class="containerPanier">
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nom du produit</th>
+                        <th>Prix unitaire</th>
+                        <th>Quantité</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @php
+                        $totalGeneral = 0; 
+                    @endphp
+
+                    @foreach($panier as $id => $item)
+                        @php
+                            // Calcul du total pour chaque produit
+                            $totalProduit = $item['produit']->prix * $item['quantite'];
+                            // Ajout au total général
+                            $totalGeneral += $totalProduit;
+                        @endphp
+
+                        <tr>
+                            <td>{{ $item['produit']->nom }}</td>
+                            <td>{{ number_format($item['produit']->prix, 2, ',', ' ') }} €</td>
+                            <td>{{ $item['quantite'] }}</td>
+                            <td>{{ number_format($totalProduit, 2, ',', ' ') }} €</td>
+                        </tr>
+                    @endforeach
+                    
+                    <!-- Ligne du total général -->
+                    <tr>
+                        <td colspan="3" style="text-align:right; font-weight:bold;">Total à payer</td>
+                        <td style="font-weight:bold;">{{ number_format($totalGeneral, 2, ',', ' ') }} €</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <h2>Vos informations</h2>
+    <div class="user-info">
+        <p><strong>Nom :</strong> {{ Auth::user()->name }}</p>
+        <p><strong>Email :</strong> {{ Auth::user()->email }}</p>
+    </div>
+@endsection

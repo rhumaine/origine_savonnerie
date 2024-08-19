@@ -29,11 +29,11 @@
             <div class="main">
                 <div class="flex flex-col items-center justify-center">
                     <div class="container">
-                    @yield('content')
+                        @yield('content')
 
-                    @if (isset($slot) && $slot != null )
-                        {{ $slot }}
-                    @endif
+                        @if (isset($slot) && $slot != null )
+                            {{ $slot }}
+                        @endif
                     </div>
                 </div>
             </div>
