@@ -19,8 +19,35 @@ header {
     margin-bottom: 50px;
 }
 
+h1{
+    font-size: 24px;
+}
+h2{
+    font-size: 20px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
 h3{
-    font-size: 2em;
+    font-size: 18px;
+    margin-top: 15px;
+    margin-bottom: 5px;
+}
+.legale ul  {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+.legale li {
+    margin-bottom: 10px;
+    margin-left:30px;
+    list-style: auto;
+}
+.legale a {
+    color: #0056b3;
+    text-decoration: none;
+}
+.legale a:hover {
+    text-decoration: underline;
 }
 /* NAVIGATION */
 #navbarNav .navbar {
@@ -231,6 +258,36 @@ button {
 .containerPanier .btn-danger:hover {
     background-color: #c82333;
 }
+
+
+/* CONTACT*/
+.contact.form-container {
+    width: 50%;
+    margin: 0 auto;
+}
+.contact .form-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+.contact .form-group label {
+    width: 15%;
+    margin-right: 10px;
+}
+
+.contact .form-group input, .contact .form-group textarea {
+    width: 70%;
+    padding: 5px;
+}
+.contact .btn-primary {
+    display: block;
+    border: 1px solid #000;
+    background-color: #fff;
+    color:#000;
+    margin: 0 auto;
+}
+
+/* FIN CONTACT*/
 /* FOOTER */
 footer {
     background-color: #0000006b; /* Couleur de fond du footer */

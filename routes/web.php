@@ -5,7 +5,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProduitsController;
 use App\Http\Controllers\PanierController;
-Route::get('/test-panier', [App\Http\Controllers\PanierController::class, 'testPanier']);
+use App\Http\Controllers\ContactController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
