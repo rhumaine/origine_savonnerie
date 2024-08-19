@@ -17,7 +17,7 @@
             </div>
             <div class="product-info">
                 <h2 class="name">{{ $produit->nom }}</h2>
-                <p class="description">{{ $produit->description }}</p>
+                <p class="description text-center"> {!! nl2br(e($produit->description)) !!}</p>
                 <p class="price">{{ $produit->prix }} €</p>
                 <p class="taxe">Taxes incluses. Frais d'expédition calculés à l'étape de paiement.</p>
 
