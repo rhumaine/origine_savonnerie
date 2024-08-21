@@ -71,14 +71,14 @@
         <!-- CP -->
         <div>
             <x-input-label for="code_postal" :value="__('Code postal')" />
-            <textarea id="code_postal" class="block mt-1 w-full" name="code_postal">{{ old('code_postal') }}</textarea>
+            <x-text-input id="code_postal" class="block mt-1 w-full" name="code_postal" :value="old('code_postal', $user->code_postal)" />
             <x-input-error :messages="$errors->get('code_postal')" class="mt-2" />
         </div>
 
         <!-- Ville -->
         <div>
             <x-input-label for="ville" :value="__('Ville')" />
-            <textarea id="ville" class="block mt-1 w-full" name="ville">{{ old('ville') }}</textarea>
+            <x-text-input id="ville" class="block mt-1 w-full" name="ville":value="old('code_postal', $user->ville)" />
             <x-input-error :messages="$errors->get('ville')" class="mt-2" />
         </div>
         

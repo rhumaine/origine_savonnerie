@@ -259,6 +259,9 @@ button {
     background-color: #c82333;
 }
 
+.containerInfoRecap{
+    padding:20px;
+}
 
 /* CONTACT*/
 .contact.form-container {
@@ -357,6 +360,6 @@ footer {
     cursor: pointer;
     text-align: center;
     text-decoration: none;
-    width: 50%;
+    width: 70%;
     margin: 0 auto;
 }

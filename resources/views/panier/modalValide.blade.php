@@ -35,7 +35,7 @@
                         <x-text-input id="password" class="form-control" type="password" name="password" required autocomplete="current-password" />
                         <x-input-error :messages="$errors->get('password')" class="mt-2" />
                     </div>
-                    <input type="hidden" name="redirect_vers_panier" value="true" />
+                    <input type="hidden" name="redirect_vers_recap" value="true" />
                     <!-- Submit Button -->
                     <div class="text-center">
                         <button type="submit" class="btn btn-primary">

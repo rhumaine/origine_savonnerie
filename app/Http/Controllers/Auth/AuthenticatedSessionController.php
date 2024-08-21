@@ -29,8 +29,8 @@ class AuthenticatedSessionController extends Controller
         $request->session()->regenerate();
 
         // Condition pour déterminer où rediriger après la connexion
-        if ($request->has('redirect_vers_panier')) {
-            return redirect()->route('panier.show');
+        if ($request->has('redirect_vers_recap')) {
+            return redirect()->route('recap.show');
         }
 
         return redirect()->intended(route('dashboard', absolute: false));
