@@ -38,6 +38,20 @@
                 <x-input-error :messages="$errors->get('address')" class="mt-2" />
             </div>
 
+            <!-- CP -->
+            <div>
+                <x-input-label for="code_postal" :value="__('Code postal')" />
+                <textarea id="code_postal" class="block mt-1 w-full" name="code_postal">{{ old('code_postal') }}</textarea>
+                <x-input-error :messages="$errors->get('code_postal')" class="mt-2" />
+            </div>
+
+            <!-- Ville -->
+            <div>
+                <x-input-label for="ville" :value="__('Ville')" />
+                <textarea id="ville" class="block mt-1 w-full" name="ville">{{ old('ville') }}</textarea>
+                <x-input-error :messages="$errors->get('ville')" class="mt-2" />
+            </div>
+
             <!-- Date de naissance -->
             <div>
                 <x-input-label for="date_naissance" :value="__('Date de naissance')" />

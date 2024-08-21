@@ -60,6 +60,9 @@
     <h2>Vos informations</h2>
     <div class="user-info">
         <p><strong>Nom :</strong> {{ Auth::user()->name }}</p>
+        <p><strong>Prénom :</strong> {{ Auth::user()->prenom }}</p>
         <p><strong>Email :</strong> {{ Auth::user()->email }}</p>
+        <p><strong>Téléphone :</strong> {{ Auth::user()->telephone }}</p>
+        <p><strong>Adresse :</strong> {{ Auth::user()->address }}</p>
     </div>
 @endsection

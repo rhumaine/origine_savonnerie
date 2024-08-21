@@ -21,6 +21,8 @@ class ProfileUpdateRequest extends FormRequest
             'prenom' => ['nullable', 'string', 'max:255'],
             'telephone' => ['nullable', 'string', 'max:20'],
             'address' => ['nullable', 'string', 'max:255'],
+            'code_postal' => ['nullable', 'string', 'max:255'],
+            'ville' => ['nullable', 'string', 'max:255'],
             'date_naissance' => ['nullable', 'date'],
         ];
     }
