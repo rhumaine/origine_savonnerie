@@ -1,5 +1,5 @@
 <x-guest-layout>
-    <div class="connexion">
+    <div class="connexion mb-5">
         <form method="POST" action="{{ route('register') }}">
             @csrf
 

@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\Session;
 
 class RegisteredUserController extends Controller
 {
@@ -57,6 +58,12 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        return redirect(route('dashboard', absolute: false));
+        $panier = Session::get('panier', []);
+
+        if(count($panier) > 0){
+            return redirect(route('recap.show', absolute: false));
+        }else{
+            return redirect(route('home', absolute: false));
+        }
     }
 }

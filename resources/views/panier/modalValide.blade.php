@@ -5,16 +5,13 @@
             <!-- Modal Left -->
             <div class="modal-section modal-left">
                 <h5 class="text-center mb-3">Pas encore inscrit ?</h5>
-                <div class="text-center mb-3">
-                    <a href="#" class="btn mt-3">Achat rapide</a>
-                </div>
                 <div class="text-center">
-                    <a href="/register" class="btn mt-3">S'inscrire</a>
+                    <a href="/register" class="btn mt-5">S'inscrire</a>
                 </div>
             </div>
             <!-- Modal Right -->
             <div class="modal-section modal-right d-flex flex-column justify-content-center align-items-center">
-                @auth
+            @auth
                 <div class="text-center" style="width:360px">
                     <a href="{{ route('recap.show') }}" class="btn mt-3">Voir le récapitulatif</a>
                 </div>
