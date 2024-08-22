@@ -58,7 +58,7 @@
     </div>
 
     <h2>Vos informations</h2>
-    <div class="user-info containerInfoRecap">
+    <div class="user-info containerRecap">
         <p><strong>Nom :</strong> {{ Auth::user()->name }}</p>
         <p><strong>Prénom :</strong> {{ Auth::user()->prenom }}</p>
         <p><strong>Email :</strong> {{ Auth::user()->email }}</p>
@@ -66,5 +66,11 @@
         <p><strong>Adresse :</strong> {{ Auth::user()->address }}</p>
         <p><strong>Code postal :</strong> {{ Auth::user()->code_postal }}</p>
         <p><strong>Ville :</strong> {{ Auth::user()->ville }}</p>
+    </div>
+
+    <h2>Mode de paiement</h2>
+    <div class="containerRecap">
+        <a href="#" class="btnPerso">Carte bancaire</a>
+        <a href="#" class="btnPerso">Paypal</a>
     </div>
 @endsection
