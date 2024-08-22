@@ -6,12 +6,16 @@
 
     <h1 class="panierName">Votre récapitulatif</h1>
 
-    @if(session('success'))
-        <p>{{ session('success') }}</p>
+    @if (session('success'))
+    <div class="alert alert-success mt-3">
+        {{ session('success') }}
+    </div>
     @endif
 
-    @if(session('error'))
-        <p>{{ session('error') }}</p>
+    @if (session('error'))
+        <div class="alert alert-error mt-3">
+            {{ session('error') }}
+        </div>
     @endif
     
     <h2>Vos produits</h2>
@@ -71,6 +75,6 @@
     <h2>Mode de paiement</h2>
     <div class="containerRecap">
         <a href="#" class="btnPerso">Carte bancaire</a>
-        <a href="#" class="btnPerso">Paypal</a>
+        <a class="btnPerso" href="{{ route('paypal.payment') }}">PayPal</a>
     </div>
 @endsection
