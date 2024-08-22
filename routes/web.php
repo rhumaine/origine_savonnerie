@@ -40,8 +40,12 @@ Route::post('/panier/vider', [PanierController::class, 'vider'])->name('panier.v
 Route::post('/panier/ajouter/{id}', [PanierController::class, 'ajouter'])->name('panier.ajouter');
 
 Route::get('/checkout/summary', [OrderSummaryController::class, 'show'])->name('recap.show');
-Route::post('/checkout/payment', [OrderSummaryController::class, 'payment'])->name('checkout.payment');
+Route::get('/checkout/paypal/payment', [OrderSummaryController::class, 'createPayPalPayment'])->name('paypal.payment');
+Route::get('/checkout/paypal/execute', [OrderSummaryController::class, 'executePayPalPayment'])->name('paypal.execute');
+
 // FIN PRODUITS
+
+
 
 
 
