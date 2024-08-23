@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Redirect;
-
+use App\Models\Commande;
 use PayPal\Auth\OAuthTokenCredential;
 use PayPal\Api\Payment;
 use PayPal\Api\PaymentExecution;
@@ -59,7 +59,20 @@ class OrderSummaryController extends Controller
         if(count($panier) > 0){
             $payer = new Payer();
             $payer->setPaymentMethod('paypal');
-           
+
+            $commande = new Commande();
+            $commande->date_commande = now();
+            $commande->mode_paiement = 'paypal';
+            $commande->user_id = auth()->id();
+
+            $commande->historique_statuts = [
+                [
+                    'statut' => 'En attente de paiement',
+                    'date' => now()
+                ]
+            ];
+
+
             $items = [];
             $total = 0;
 
@@ -74,6 +87,9 @@ class OrderSummaryController extends Controller
                 $items[] = $item;
             }
 
+            $commande->total = $total;
+            $commande->save();
+
             $itemList = new ItemList();
             $itemList->setItems($items);
 
@@ -87,7 +103,7 @@ class OrderSummaryController extends Controller
                 ->setDescription('paiement de la commande Origine Savonnerie');
 
             $redirectUrls = new RedirectUrls();
-            $redirectUrls->setReturnUrl(route('paypal.execute'))
+            $redirectUrls->setReturnUrl(route('paypal.execute',['commande_id' => $commande->id]))
                     ->setCancelUrl(route('recap.show'));
 
             $payment = new Payment();
@@ -99,21 +115,19 @@ class OrderSummaryController extends Controller
             try {
                 $payment->create($this->apiContext);
     
+
+                $datePrefix = now()->format('Ymd');
+                $numCommande = $datePrefix . $commande->id;
+                $commande->num_commande = $numCommande;
+                $commande->save();
+
                 return redirect($payment->getApprovalLink());
             } catch (\Exception $e) {
                 return back()->withErrors('Erreur! ' . $e->getMessage());
             }
-
         }else{
             return Redirect::route('home');
         }
-        // Logique pour traiter le paiement
-
-        // créer une commande avec en statut "En attente de paiement"
-
-
-        // Validation, communication avec le système de paiement, etc.
-        return redirect()->route('payment.success');
     }
 
 
@@ -122,6 +136,7 @@ class OrderSummaryController extends Controller
     {
         $paymentId = $request->paymentId;
         $payment = Payment::get($paymentId, $this->apiContext);
+        $commandeId = $request->get('commande_id');
 
         $execution = new PaymentExecution();
         $execution->setPayerId($request->PayerID);
@@ -129,12 +144,21 @@ class OrderSummaryController extends Controller
         try {
             $result = $payment->execute($execution, $this->apiContext);
 
-            // Payment success logic
-
             if($result->state == "approved"){
 
                 // update commande en apprrouvé
-                
+                $commande = Commande::find($commandeId);
+                if ($commande) {
+                    
+                    $historique = $commande->historique_statuts ?? [];
+                    $historique[] = [
+                        'statut' => 'Approuvé',
+                        'date' => now()
+                    ]; 
+                    $commande->historique_statuts = $historique;
+                    $commande->save();
+                }
+
                 Session::forget('panier');
                 return view('paiement.success', compact('result'));
             }else{
