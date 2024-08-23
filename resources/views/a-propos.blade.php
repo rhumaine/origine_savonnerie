@@ -1,9 +1,4 @@
-{{-- resources/views/pages/a-propos.blade.php --}}
-@extends('layouts.app')
-
-@section('title', 'A propos')
-
-@section('content')
+<x-app-layout>
     <div class="container text-center mb-5">
         <img class="mb-5" src="{{ asset('images/a_propos/exemple_apropos.jpg') }}" alt="exemple à propos" style="margin: 0 auto;"/>
         <p class="mb-3">Savonnerie artisanale et cosmétiques naturelles pour votre bien être et celui de la planète ! 🌏🌿</p>
@@ -19,5 +14,5 @@
         <p class="mb-5">Seules des <b>argiles</b> sont utilisées pour vous apporter tous <b>leurs bienfaits</b></p>
         <img src="{{ asset('images/logo/saponification.png') }}" alt="Logo" style="height: 150px; width: auto;margin:0 auto">
     </div>
-@endsection
+</x-app-layout>
 

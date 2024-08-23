@@ -1,11 +1,7 @@
 {{-- resources/views/pages/home.blade.php --}}
-@extends('layouts.app')
-
-@section('title', 'Accueil')
-
-@section('content')
+<x-app-layout>
     @include('partials.carrousel')
 
     @include('partials.products')
-@endsection
+</x-app-layout>
 

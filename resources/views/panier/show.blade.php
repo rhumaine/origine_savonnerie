@@ -1,10 +1,5 @@
 {{-- resources/views/produits/show.blade.php --}}
-@extends('layouts.app')
-
-@section('title', 'Détails du Produit')
-
-@section('content')
-
+<x-app-layout>
     <h1 class="panierName">Votre Panier</h1>
 
     @if(session('success'))
@@ -73,6 +68,4 @@
     @else
         <p>Votre panier est vide.</p>
     @endif
-
-
-@endsection
+</x-app-layout>

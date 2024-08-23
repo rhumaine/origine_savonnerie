@@ -1,9 +1,4 @@
-@extends('layouts.app')
-
-@section('title', 'Détails du Produit')
-
-@section('content')
-
+<x-app-layout>
     <h1 class="panierName">Votre récapitulatif</h1>
 
     @if (session('success'))
@@ -77,4 +72,4 @@
         <a href="#" class="btnPerso">Carte bancaire</a>
         <a class="btnPerso" href="{{ route('paypal.payment') }}">PayPal</a>
     </div>
-@endsection
+</x-app-layout>

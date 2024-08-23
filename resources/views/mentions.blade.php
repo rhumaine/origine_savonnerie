@@ -1,9 +1,5 @@
 {{-- resources/views/contact.blade.php --}}
-@extends('layouts.app')
-
-@section('title', 'Condition générale de vente')
-
-@section('content')
+<x-app-layout>
     <div class="legale">
     <h1 class="text-center">Mentions Légales</h1>
 
@@ -54,5 +50,5 @@
             <li>Adresse : <strong>une adresse ici</strong></li>
         </ul>
     </div>
-@endsection
+</x-app-layout>
 
