@@ -1,4 +1,4 @@
-<footer class="pt-5 text-center text-sm">
+<footer class="pt-5 text-center text-sm mt-5">
     <nav class="footer-menu">
         <ul>
             <li><a href="{{ route('conditions') }}">Conditions Générales de Vente</a></li>

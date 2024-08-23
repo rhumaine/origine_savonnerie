@@ -170,4 +170,7 @@ class OrderSummaryController extends Controller
         }
     }
 
+    public function commandeShow(Request $request){
+
+    }
 }

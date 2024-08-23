@@ -39,6 +39,9 @@ Route::get('/panier', [PanierController::class, 'show'])->name('panier.show');
 Route::post('/panier/vider', [PanierController::class, 'vider'])->name('panier.vider');
 Route::post('/panier/ajouter/{id}', [PanierController::class, 'ajouter'])->name('panier.ajouter');
 
+
+Route::post('/commandes/{id}', [OrderSummaryController::class, 'commandeShow'])->name('commandes.show');
+
 Route::get('/checkout/summary', [OrderSummaryController::class, 'show'])->name('recap.show');
 Route::get('/checkout/paypal/payment', [OrderSummaryController::class, 'createPayPalPayment'])->name('paypal.payment');
 Route::get('/checkout/paypal/execute', [OrderSummaryController::class, 'executePayPalPayment'])->name('paypal.execute');
@@ -49,9 +52,7 @@ Route::get('/checkout/paypal/execute', [OrderSummaryController::class, 'executeP
 
 
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [ProfileController::class, 'dashboard'])->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
