@@ -88,6 +88,9 @@
                                     <a href="{{ route('commandes.show', $c->id) }}" class="btnDetail px-4 py-2 rounded-md">
                                         Voir les détails
                                     </a>
+                                    <a href="" class="btnDetail px-4 py-2 rounded-md">
+                                        Mettre à jour
+                                    </a>
                                 </div>
                             </div> 
                         @endforeach
