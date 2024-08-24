@@ -7,6 +7,10 @@ use App\Http\Controllers\ProduitsController;
 use App\Http\Controllers\PanierController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\OrderSummaryController;
+use App\Http\Controllers\AdminController;
+
+use App\Http\Middleware\AdminMiddleware;
+
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
@@ -50,9 +54,8 @@ Route::get('/checkout/paypal/execute', [OrderSummaryController::class, 'executeP
 
 
 
-
-
-Route::get('/dashboard', [ProfileController::class, 'dashboard'])->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [ProfileController::class, 'dashboard'])->middleware('auth', 'verified')->name('dashboard');
+Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->middleware('auth', 'admin')->name('admin.dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

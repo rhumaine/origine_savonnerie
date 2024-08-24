@@ -3,7 +3,7 @@
     <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container">
             <!-- Logo à gauche -->
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="{{ url('/') }}">
                 <img src="{{ asset('images/logo/logo.png') }}" alt="Logo" style="height: 150px; width: auto;">
             </a>
 
@@ -44,7 +44,11 @@
                         @if (Route::has('login'))
                             @auth
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('dashboard') }}">Mon compte</a>
+                                    @if(auth()->user()->role === 'admin')
+                                        <a class="nav-link" href="{{ route('admin.dashboard') }}">Dashboard</a>
+                                    @else
+                                        <a class="nav-link" href="{{ route('dashboard') }}">Mon compte</a>
+                                    @endif
                                 </li>
                             @else
                                 <li class="nav-item">
