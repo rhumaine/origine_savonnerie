@@ -76,7 +76,7 @@
                                             $dernierStatut = !empty($historique) ? end($historique)['statut'] : 'Aucun statut disponible';
                                         @endphp
                                         <p class="text-sm text-gray-500 dark:text-gray-300">
-                                            Statut : <span class="font-semibold">{{ $dernierStatut }}</span>
+                                            Statut : <span id="statusDisplay" class="font-semibold">{{ $dernierStatut }}</span>
                                         </p>
                                         <p class="text-sm text-gray-500 dark:text-gray-300">
                                             Prix : {{ number_format($c->total, 2) }} €
@@ -88,8 +88,11 @@
                                     <a href="{{ route('commandes.show', $c->id) }}" class="btnDetail px-4 py-2 rounded-md">
                                         Voir les détails
                                     </a>
-                                    <a href="" class="btnDetail px-4 py-2 rounded-md">
-                                        Mettre à jour
+                                    <a href="#" class="btnDetail px-4 py-2 rounded-md" data-status="Archivé" data-id="{{ $c->id }}">
+                                        Archiver
+                                    </a>
+                                    <a href="#" class="btnDetail px-4 py-2 rounded-md" data-status="Expédié" data-id="{{ $c->id }}">
+                                        Expédier
                                     </a>
                                 </div>
                             </div> 
@@ -113,4 +116,33 @@
         // Show profile by default
         showSection('orders');
     </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Sélectionne tous les liens avec la classe 'btnDetail'
+            document.querySelectorAll('.btnDetail').forEach(function(button) {
+                button.addEventListener('click', function(event) {
+                    event.preventDefault(); // Empêche le comportement par défaut du lien
+                    
+                    const status = button.getAttribute('data-status');
+                    const commandeId = button.getAttribute('data-id');
+
+                    fetch(`/admin/commande/update-status/${commandeId}`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                        },
+                        body: JSON.stringify({ statut: status })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        document.getElementById('statusDisplay').textContent = status;
+                    })
+                    .catch(error => console.error('Error:', error));
+                });
+            });
+        });
+    </script>
+
 </x-app-layout>

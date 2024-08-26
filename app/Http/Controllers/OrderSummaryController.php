@@ -186,7 +186,7 @@ class OrderSummaryController extends Controller
         if($user === $request->user()->id || $request->user()->role === "admin"){
             return view('commandes.show', [
                 'user' => $user,
-                'commandes' => $commande,
+                'commande' => $commande,
             ]);
         }else{
             return redirect()->route('home');
