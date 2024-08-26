@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('commande', function (Blueprint $table) {
             $table->id();
             $table->string('num_commande')->unique()->nullable()->change();
-            $table->date('date_Commande');
+            $table->date('date_commande');
             $table->decimal('total', 10, 2);
             $table->string('mode_paiement');
             $table->date('date_livraison_prevue')->nullable();

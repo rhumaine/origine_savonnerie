@@ -56,6 +56,7 @@ Route::get('/checkout/paypal/execute', [OrderSummaryController::class, 'executeP
 
 Route::get('/dashboard', [ProfileController::class, 'dashboard'])->middleware('auth', 'verified')->name('dashboard');
 Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->middleware('auth', 'admin')->name('admin.dashboard');
+Route::post('/admin/commande/update-status/{commande}', [AdminController::class, 'updateStatus'])->middleware('auth', 'admin')->name('update.status');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
