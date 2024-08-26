@@ -2,10 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\Pivot;
 
-class CommandeProduit extends Model
+class CommandeProduit extends Pivot
 {
     protected $table = 'commande_produit';
 
@@ -15,16 +14,4 @@ class CommandeProduit extends Model
         'quantite',
         'prix_unitaire',
     ];
-    
-    // Relation avec le modèle Commande
-    public function commande()
-    {
-        return $this->belongsTo(Commande::class);
-    }
-
-    // Relation avec le modèle Produit
-    public function produit()
-    {
-        return $this->belongsTo(Produit::class);
-    }
 }

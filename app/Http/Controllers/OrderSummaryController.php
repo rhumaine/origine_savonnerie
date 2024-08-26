@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Redirect;
 use App\Models\Commande;
+use App\Models\CommandeProduit;
 use PayPal\Auth\OAuthTokenCredential;
 use PayPal\Api\Payment;
 use PayPal\Api\PaymentExecution;
@@ -75,6 +76,9 @@ class OrderSummaryController extends Controller
 
             $items = [];
             $total = 0;
+            $commande->total = $total;
+            
+            $commande->save();
 
             foreach ($panier as $panierItem) {
                 $total += $panierItem['produit']->prix * $panierItem['quantite'];
@@ -83,8 +87,13 @@ class OrderSummaryController extends Controller
                     ->setCurrency('EUR')
                     ->setQuantity($panierItem['quantite'])
                     ->setPrice($panierItem['produit']->prix);
-                
                 $items[] = $item;
+
+                // Ajouter les produits dans la table pivot commande_produit
+                $commande->produit()->attach($panierItem['produit']->id, [
+                    'quantite' => $panierItem['quantite'],
+                    'prix_unitaire' => $panierItem['produit']->prix,
+                ]);
             }
 
             $commande->total = $total;
