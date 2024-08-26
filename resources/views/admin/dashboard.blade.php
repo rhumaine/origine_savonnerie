@@ -88,10 +88,10 @@
                                     <a href="{{ route('commandes.show', $c->id) }}" class="btnDetail px-4 py-2 rounded-md">
                                         Voir les détails
                                     </a>
-                                    <a href="#" class="btnDetail px-4 py-2 rounded-md" data-status="Archivé" data-id="{{ $c->id }}">
+                                    <a href="#" class="btnAction px-4 py-2 rounded-md" data-status="Archivé" data-id="{{ $c->id }}">
                                         Archiver
                                     </a>
-                                    <a href="#" class="btnDetail px-4 py-2 rounded-md" data-status="Expédié" data-id="{{ $c->id }}">
+                                    <a href="#" class="btnAction px-4 py-2 rounded-md" data-status="Expédié" data-id="{{ $c->id }}">
                                         Expédier
                                     </a>
                                 </div>
@@ -120,7 +120,7 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // Sélectionne tous les liens avec la classe 'btnDetail'
-            document.querySelectorAll('.btnDetail').forEach(function(button) {
+            document.querySelectorAll('.btnAction').forEach(function(button) {
                 button.addEventListener('click', function(event) {
                     event.preventDefault(); // Empêche le comportement par défaut du lien
                     
