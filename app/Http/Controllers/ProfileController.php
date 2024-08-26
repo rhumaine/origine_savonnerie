@@ -9,8 +9,21 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 
+use App\Models\Commande;
+
 class ProfileController extends Controller
 {
+    public function dashboard(Request $request){
+
+        $commandes = Commande::where('user_id', $request->user()->id)->get();
+
+        return view('profile.dashboard', [
+            'user' => $request->user(),
+            'commandes' => $commandes,
+        ]);
+    }
+
+
     /**
      * Display the user's profile form.
      */

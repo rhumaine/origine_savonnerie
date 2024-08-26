@@ -198,65 +198,64 @@ button {
     display: flex;
     justify-content: space-between;
     padding: 20px;
-}
 
-.containerPanier .table-container {
-    flex: 2; /* Occupe plus d'espace */
-    margin-right: 20px;
-}
+    .table-container {
+        flex: 2; 
+        margin-right: 20px;
+    }
 
-.containerPanier .summary-container {
-    flex: 0.5; /* Occupe moins d'espace */
-    border: 1px solid #ddd;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
+    .summary-container {
+        flex: 0.5;
+        border: 1px solid #ddd;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
 
-.containerPanier table {
-    width: 100%;
-    border-collapse: collapse;
-}
+    table {
+        width: 100%;
+        border-collapse: collapse;
 
-.containerPanier th, .containerPanier td {
-    padding: 10px;
-    text-align: left;
-    border: 1px solid #ddd;
-}
+        th {
+            background-color: #f4f4f4;
+        }
+        th, .containerPanier td {
+            padding: 10px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+    }
 
-.containerPanier th {
-    background-color: #f4f4f4;
-}
+    .total {
+        font-weight: bold;
+        font-size: 1.2em;
+    }
 
-.containerPanier .total {
-    font-weight: bold;
-    font-size: 1.2em;
-}
+    .btn {
+        display: inline-block;
+        padding: 10px 20px;
+        font-size: 1em;
+        color: #fff;
+        background-color: #007bff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        text-align: center;
+        text-decoration: none;
+        width: 100%;
 
-.containerPanier .btn {
-    display: inline-block;
-    padding: 10px 20px;
-    font-size: 1em;
-    color: #fff;
-    background-color: #007bff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    text-align: center;
-    text-decoration: none;
-    width: 100%;
-}
+        &:hover {
+            background-color: #0056b3;
+        }
+    }
 
-.containerPanier .btn:hover {
-    background-color: #0056b3;
-}
+    .btn-danger {
+        background-color: #dc3545;
 
-.containerPanier .btn-danger {
-    background-color: #dc3545;
-}
-
-.containerPanier .btn-danger:hover {
-    background-color: #c82333;
+        &:hover {
+            background-color: #c82333;
+        }
+    }
 }
 
 .containerRecap{
@@ -268,26 +267,29 @@ button {
     width: 50%;
     margin: 0 auto;
 }
-.contact .form-group {
-    display: flex;
-    align-items: center;
-    margin-bottom: 15px;
-}
-.contact .form-group label {
-    width: 15%;
-    margin-right: 10px;
-}
+.contact {
+    .form-group {
+        display: flex;
+        align-items: center;
+        margin-bottom: 15px;
+    
+        label {
+            width: 15%;
+            margin-right: 10px;
+        }
 
-.contact .form-group input, .contact .form-group textarea {
-    width: 70%;
-    padding: 5px;
-}
-.contact .btn-primary {
-    display: block;
-    border: 1px solid #000;
-    background-color: #fff;
-    color:#000;
-    margin: 0 auto;
+        input, textarea{
+            width: 70%;
+            padding: 5px;
+        }
+    }
+    .btn-primary {
+        display: block;
+        border: 1px solid #000;
+        background-color: #fff;
+        color:#000;
+        margin: 0 auto;
+    }
 }
 
 /* FIN CONTACT*/
@@ -295,27 +297,27 @@ button {
 footer {
     background-color: #0000006b; 
     padding: 20px 0; 
-}
 
-.footer-menu ul {
-    list-style-type: none; 
-    padding: 0;
-    margin: 0;
-    display: inline-block; 
-}
+    .footer-menu ul {
+        list-style-type: none; 
+        padding: 0;
+        margin: 0;
+        display: inline-block; 
 
-.footer-menu li {
-    display: inline; 
-    margin: 0 15px; 
-}
+        li {
+            display: inline; 
+            margin: 0 15px; 
 
-.footer-menu a {
-    text-decoration: none; 
-    color: #fff; 
-}
+            a {
+                text-decoration: none; 
+                color: #fff; 
 
-.footer-menu a:hover {
-    text-decoration: underline; 
+                &:hover{
+                    text-decoration: underline; 
+                }
+            }
+        }
+    }
 }
 
 /* CONNEXION*/
@@ -326,9 +328,10 @@ footer {
     padding: 15px;
     margin: 0 auto;
     background-color: #fff;
-}
-.connexion button[type="submit"]{
-    background-color: #000;
+
+    button[type="submit"]{
+        background-color: #000;
+    }
 }
 
 /* MODAL*/
@@ -377,8 +380,78 @@ footer {
     width: 70%;
     margin: 0 auto;
     transition: box-shadow 0.3s ease;
+    
+    &:hover{
+        color: #000;
+        box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.8);
+    }
 }
-.btnPerso:hover{
-    color: #000;
-    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.8);
+
+/* DASHBOARD */
+.sidebarDashboard{
+    margin-right: 10px;
+
+    ul{
+        li{
+            padding: 2px;
+        }
+    }
+}
+.contentDashboard{
+    width: 100%;
+    border-radius: 0.5em;
+
+    h3{
+        margin-top: 0;
+    }
+
+    button[type="submit"]{
+        background-color: #000;
+    }
+
+    .btnDetail{
+        font-size: 1em;
+        color: #000;
+        background-color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        text-align: center;
+        text-decoration: none;
+        transition: box-shadow 0.3s ease;
+        
+        &:hover{
+            color: #000;
+            box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.8);
+        }
+    }
+
+    .containerCommande{
+        display: flex;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        background-color: #fff;
+        margin-bottom: 16px;
+        overflow: hidden;
+    }
+    .content{
+        flex: 3;
+        padding: 16px;
+    }
+    .buttonContainer{
+        flex: 1; /* Equivalent to w-1/4 */
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        padding: 16px;
+        
+        a{
+            transition: box-shadow 0.3s ease;
+
+            &:hover{
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            }
+        }
+    }
+
 }

@@ -12,4 +12,12 @@ class Produit extends Model
     protected $table = 'produits';
 
     protected $fillable = ['nom', 'description', 'prix'];
+
+    public function commande()
+    {
+        return $this->belongsToMany(Commande::class, 'commande_produit')
+                    ->using(CommandeProduit::class)
+                    ->withPivot('quantite', 'prix_unitaire')
+                    ->withTimestamps();
+    }
 }

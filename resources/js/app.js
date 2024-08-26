@@ -31,3 +31,4 @@ document.addEventListener('DOMContentLoaded', () => {
         plusButton.addEventListener('click', () => changeQuantity(1));
     }
 });
+

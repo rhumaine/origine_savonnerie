@@ -170,4 +170,17 @@ class OrderSummaryController extends Controller
         }
     }
 
+    public function commandeShow(Request $request, $id){
+        $commande = Commande::findOrFail($id);
+        $user = $commande->user->id;
+
+        if($user === $request->user()->id || $request->user()->role === "admin"){
+            return view('commandes.show', [
+                'user' => $user,
+                'commandes' => $commande,
+            ]);
+        }else{
+            return redirect()->route('home');
+        }
+    }
 }
