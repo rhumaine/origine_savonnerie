@@ -43,7 +43,6 @@ Route::get('/panier', [PanierController::class, 'show'])->name('panier.show');
 Route::post('/panier/vider', [PanierController::class, 'vider'])->name('panier.vider');
 Route::post('/panier/ajouter/{id}', [PanierController::class, 'ajouter'])->name('panier.ajouter');
 
-
 Route::get('/commande/{id}', [OrderSummaryController::class, 'commandeShow'])->middleware('auth')->name('commandes.show');
 
 Route::get('/checkout/summary', [OrderSummaryController::class, 'show'])->name('recap.show');
