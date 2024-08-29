@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('commande', function (Blueprint $table) {
             $table->id();
-            $table->string('num_commande')->unique()->nullable()->change();
+            $table->string('num_commande')->unique()->nullable();
             $table->date('date_commande');
             $table->decimal('total', 10, 2);
             $table->string('mode_paiement');
