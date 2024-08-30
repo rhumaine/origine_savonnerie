@@ -27,16 +27,5 @@
         "CACHE_DRIVER": "array",
         "LOG_CHANNEL": "stderr",
         "SESSION_DRIVER": "cookie"
-    },
-    "scripts": {
-        "vercel": [
-          "@php -v",
-          "npm -v",
-          "npm install && npm run dev"
-        ],
-        "post-autoload-dump": [
-            "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
-            "@php artisan package:discover --ansi"
-        ]
     }
 }
