@@ -1,47 +1,53 @@
 {{-- resources/views/produits/show.blade.php --}}
 <x-app-layout>
     <section class="product-detail mb-5">
-        <div class="product-image">
+        <div class="row">
+            <div class="col-12 col-md-12 col-xl-6 mb-4 mb-md-0">
+                <div class="product-image d-flex justify-content-center">
 
-            @if($produit->url_image)
-                <img src="{{ asset('images/produits/' . $produit->url_image) }}" alt="{{ $produit->nom }}">
-            @else
-                <img src="{{ asset('images/produits/600x900.png') }}" alt="Image par défault">
-            @endif
+                    @if($produit->url_image)
+                        <img src="{{ asset('images/produits/' . $produit->url_image) }}" alt="{{ $produit->nom }}">
+                    @else
+                        <img src="{{ asset('images/produits/600x900.png') }}" alt="Image par défault">
+                    @endif
 
 
-        </div>
-        <div class="product-info">
-
-            @if (session('success'))
-            <div class="alert alert-success mt-3">
-                {{ session('success') }}
+                </div>
             </div>
-            @endif
+            <div class="col-12 col-md-12 col-xl-6">
+                <div class="product-info">
 
-            @if (session('error'))
-                <div class="alert alert-error mt-3">
-                    {{ session('error') }}
+                    @if (session('success'))
+                    <div class="alert alert-success mt-3">
+                        {{ session('success') }}
+                    </div>
+                    @endif
+
+                    @if (session('error'))
+                        <div class="alert alert-error mt-3">
+                            {{ session('error') }}
+                        </div>
+                    @endif
+                    
+                    <h2 class="name text-center">{{ Str::upper($produit->nom) }}</h2>
+                    <p class="description text-center"> {!! nl2br(e($produit->description)) !!}</p>
+                    <p class="price">{{ $produit->prix }} € TTC</p>
+                    <p class="taxe">Taxes incluses. Frais d'expédition calculés à l'étape de paiement.</p>
+
+                    <form action="{{ route('panier.ajouter', $produit->id) }}" method="POST">
+                        @csrf
+                        <!-- Composant de contrôle de quantité -->
+                        <div class="quantity-input">
+                            <button class="quantity_button" type="button" onclick="changeQuantity(-1)">-</button>
+                            <input class="quantity_input" type="text" name="quantite" id="quantite" min="1" value="1">
+                            <button class="quantity_button" type="button" onclick="changeQuantity(1)">+</button>
+                        </div>
+
+                        <!-- Ajouter des boutons ou des formulaires pour acheter, ajouter au panier, etc. -->
+                        <button class="add_panier" type="submit">Ajouter au panier</button>
+                    </form>
                 </div>
-            @endif
-            
-            <h2 class="name">{{ Str::upper($produit->nom) }}</h2>
-            <p class="description text-center"> {!! nl2br(e($produit->description)) !!}</p>
-            <p class="price">{{ $produit->prix }} € TTC</p>
-            <p class="taxe">Taxes incluses. Frais d'expédition calculés à l'étape de paiement.</p>
-
-            <form action="{{ route('panier.ajouter', $produit->id) }}" method="POST">
-                @csrf
-                <!-- Composant de contrôle de quantité -->
-                <div class="quantity-input">
-                    <button class="quantity_button" type="button" onclick="changeQuantity(-1)">-</button>
-                    <input class="quantity_input" type="text" name="quantite" id="quantite" min="1" value="1">
-                    <button class="quantity_button" type="button" onclick="changeQuantity(1)">+</button>
-                </div>
-
-                <!-- Ajouter des boutons ou des formulaires pour acheter, ajouter au panier, etc. -->
-                <button class="add_panier" type="submit">Ajouter au panier</button>
-            </form>
+            </div>
         </div>
     </section>
 
@@ -54,6 +60,8 @@
 
     <section>
         <h2 class="text-center">Retrouvez nos autres produits</h2>
+        <div class="container">
         @include('partials.products')
+    </div>
     </section>
 </x-app-layout>
