@@ -1,4 +1,6 @@
 {{-- resources/views/confidentialite.blade.php --}}
+@section('title',  'Politique de Confidentialité')
+
 <x-app-layout>
     <div class="legale">
         <h1 class="text-center">Politique de Confidentialité</h1>

@@ -1,3 +1,5 @@
+@section('title',  'Nous contacter')
+
 <x-app-layout>
     <div class="container form-container py-5">
         <h3 class="text-center mb-4">Contactez-nous</h3>

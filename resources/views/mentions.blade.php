@@ -1,4 +1,6 @@
 {{-- resources/views/contact.blade.php --}}
+@section('title',  'Mentions légales')
+
 <x-app-layout>
     <div class="legale">
     <h1 class="text-center">Mentions Légales</h1>
