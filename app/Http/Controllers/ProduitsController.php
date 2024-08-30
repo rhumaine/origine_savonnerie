@@ -11,7 +11,9 @@ class ProduitsController extends Controller
     public function show($id){
         $produits = Produit::inRandomOrder()->limit(5)->get();
 
-        $produit = Produit::find($id);
+       // $produit = Produit::find($id);
+
+       $produit = [];
 
         if(!$produit){
             abort(404, 'Produit non trouvé');
