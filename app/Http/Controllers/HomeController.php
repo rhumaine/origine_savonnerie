@@ -16,8 +16,9 @@ class HomeController extends Controller
     {
 
       
-        $produits = Produit::all();
-       
+       // $produits = Produit::all();
+       $produit = [];
+
 
         return view('home', compact('produits'));
     }
