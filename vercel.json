@@ -8,7 +8,8 @@
          { "src": "/build/(.*)", "dest": "/public/build/" },
          { "src": "/images/(.*)", "dest": "/public/images/" },
          { "src": "/(.*)", "dest": "/api/index.php" },
-         {"src": "/resources/(.*)","dest": "/public/resources/"}
+         {"src": "/resources/(.*)","dest": "/public/resources/"},
+         {"src": "/(css|js|vendor|assets|build)/(.*)","dest": "public/$1/$2"}
        
      ],
     "env": {
@@ -26,5 +27,16 @@
         "CACHE_DRIVER": "array",
         "LOG_CHANNEL": "stderr",
         "SESSION_DRIVER": "cookie"
+    },
+    "scripts": {
+        "vercel": [
+          "@php -v",
+          "npm -v",
+          "npm install && npm run dev"
+        ],
+        "post-autoload-dump": [
+            "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
+            "@php artisan package:discover --ansi"
+        ]
     }
 }
