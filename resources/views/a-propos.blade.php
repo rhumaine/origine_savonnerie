@@ -1,3 +1,5 @@
+@section('title',  'A propos de nous')
+
 <x-app-layout>
     <div class="container text-center mb-5">
         <img class="mb-5" src="{{ asset('images/a_propos/exemple_apropos.jpg') }}" alt="exemple à propos" style="margin: 0 auto;"/>

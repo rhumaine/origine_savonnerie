@@ -1,4 +1,6 @@
-{{-- resources/views/produits/show.blade.php --}}
+{{-- resources/views/panier/show.blade.php --}}
+@section('title',  'Mon panier')
+
 <x-app-layout>
     <h1 class="panierName">Votre Panier</h1>
 

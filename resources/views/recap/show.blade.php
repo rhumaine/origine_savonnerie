@@ -1,3 +1,5 @@
+@section('title',  'Récapitulatif de la commande')
+
 <x-app-layout>
     <h1 class="panierName">Votre récapitulatif</h1>
 

@@ -1,4 +1,6 @@
 {{-- resources/views/produits/show.blade.php --}}
+@section('title',  'Savon '.Str::upper($produit->nom))
+
 <x-app-layout>
     <section class="product-detail mb-5">
         <div class="row">

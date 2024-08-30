@@ -1,4 +1,6 @@
 {{-- resources/views/conditions.blade.php --}}
+@section('title',  'Conditions Générales de Vente')
+
 <x-app-layout>
     <div class="legale">
         <h1 class="text-center">Conditions Générales de Vente</h1>
