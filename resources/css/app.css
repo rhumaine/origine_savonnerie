@@ -112,7 +112,6 @@ a:hover{
 
 /* PAGE DETAIL PRODUIT */
 .product-detail {
-    display: flex;
     margin: 20px;
 }
 
@@ -125,7 +124,6 @@ a:hover{
 
 .product-info {
     margin: 0 auto;
-    width: 40%;
 }
 
 .product-info .name{
@@ -453,5 +451,22 @@ footer {
             }
         }
     }
+}
 
+@media (max-width: 576px) {
+    .product-info .name {
+        font-size: 2.8rem; /* Petite taille pour les très petits écrans */
+    }
+}
+
+@media (min-width: 577px) and (max-width: 768px) {
+    .product-info .name {
+        font-size: 3.5rem; /* Taille moyenne pour les écrans un peu plus grands */
+    }
+}
+
+@media (min-width: 769px) {
+    .product-info .name {
+        font-size: 4rem; /* Taille plus grande pour les écrans moyens à grands */
+    }
 }

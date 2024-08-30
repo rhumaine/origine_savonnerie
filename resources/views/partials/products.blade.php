@@ -1,8 +1,9 @@
-<div class="d-flex flex-wrap justify-content-start gap-3 pt-5">
+<div class="row g-3 pt-5">
 
     @foreach($produits as $p)
         @if (!isset($produit->id) || $produit->id != $p->id)
-            <div class="card mb-5" style="flex: 1 1 calc(33% - 1rem); max-width: 33%;">
+        <div class="col-12 col-sm-6 col-md-4 col-lg-4">
+            <div class="card">
                 <a href="{{ url('/produits/'.$p->id) }}">
                     <div class="image-container">
                         @if($p->url_image)
@@ -17,6 +18,7 @@
                     </div>
                 </a>
             </div>
+        </div>
         @endif
     @endforeach
 </div>
