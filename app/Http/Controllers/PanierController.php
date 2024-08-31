@@ -29,8 +29,22 @@ class PanierController extends Controller
                     'quantite' => $quantite,
                 ];
             }
+echo "<pre>";
+print_r( $panier );
+echo "</pre>";
+
+            
+echo "<pre>";
+print_r( "------------------------------------------------" );
+echo "</pre>";
 
             $request->session()->put('panier', $panier);
+
+            
+echo "<pre>";
+print_r( $request->session()->get('panier', []) );
+echo "</pre>";
+dd('ok');
             return redirect()->back()->with('success', 'Produit ajouté au panier !');
         }
         
@@ -47,11 +61,13 @@ class PanierController extends Controller
         foreach ($panier as $item) {
             $total += $item['produit']->prix * $item['quantite'];
         }
-        dd($panier);
+        echo "<pre>";
+print_r( $request->session()->get('panier', []) );
+echo "</pre>";
         return view('panier.show',  ['panier' => $panier, 'total' => $total]); 
     }
 
-    public function vider()
+    public function vider(Request $request)
     {
         $request->session()->forget('panier');
         return redirect()->route('panier.show')->with('success', 'Le panier a été vidé.');
