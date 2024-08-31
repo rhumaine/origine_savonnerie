@@ -4,10 +4,8 @@
         "api/index.php": { "runtime": "vercel-php@0.6.0" }
     },
     "routes": [
-        { "src": "/(.*)", "dest": "/api/index.php" },
-        { "src": "/images/(.*)", "dest": "/public/images/$1" },
-        { "src": "/(.*)", "dest": "/public/$1" },  // Ajouté pour servir les autres fichiers statiques
-        { "src": "/http://(.*)", "status": 301, "headers": { "Location": "https://$1" } }
+         { "src": "/build/(.*)", "dest": "/public/build/" },
+          { "src": "/(.*)", "dest": "/api/index.php" }
     ],
     "env": {
         "APP_ENV": "production",
