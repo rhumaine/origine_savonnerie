@@ -32,8 +32,8 @@ class PanierController extends Controller
             }
 
             $request->session()->put('panier', $panier);
+            $request->session()->regenerate();
 
-Log::info('Panier sauvegardé dans la session:', $request->session()->get('panier'));
             return redirect()->back()->with('success', 'Produit ajouté au panier !');
         }
         
