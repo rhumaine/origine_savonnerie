@@ -35,14 +35,14 @@
                     @foreach($panier as $id => $item)
                         @php
                             // Calcul du total pour chaque produit
-                            $totalProduit = $item['produit']->prix * $item['quantite'];
+                            $totalProduit = $item['prix'] * $item['quantite'];
                             // Ajout au total général
                             $totalGeneral += $totalProduit;
                         @endphp
 
                         <tr>
-                            <td>{{ $item['produit']->nom }}</td>
-                            <td>{{ number_format($item['produit']->prix, 2, ',', ' ') }} €</td>
+                            <td>{{ $item['nom'] }}</td>
+                            <td>{{ number_format($item['prix'], 2, ',', ' ') }} €</td>
                             <td>{{ $item['quantite'] }}</td>
                             <td>{{ number_format($totalProduit, 2, ',', ' ') }} €</td>
                         </tr>

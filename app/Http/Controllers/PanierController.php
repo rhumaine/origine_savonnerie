@@ -28,6 +28,7 @@ class PanierController extends Controller
             } else {
                 // Ajouter le produit au panier avec les détails nécessaires
                 $panier[$id] = [
+                    'id' => $id,
                     'nom' => $produit->nom,
                     'prix' => $produit->prix,
                     'quantite' => $quantite,

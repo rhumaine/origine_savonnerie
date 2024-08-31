@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Redirect;
 use App\Models\Commande;
 use App\Models\CommandeProduit;
@@ -37,12 +38,12 @@ class OrderSummaryController extends Controller
     public function show(Request $request)
     {
         
-        $panier = Session::get('panier', []);
+        $panier = json_decode($request->cookie('panier', '[]'), true);
         $total = 0;
         if(count($panier) > 0){
             // Calculer le total de la commande
             foreach ($panier as $item) {
-                $total += $item['produit']->prix * $item['quantite'];
+                $total += $item['prix'] * $item['quantite'];
             }
             
             return view('recap.show',  ['panier' => $panier, 'total' => $total]);
@@ -55,8 +56,8 @@ class OrderSummaryController extends Controller
     public function createPayPalPayment(Request $request)
     {
 
-        $panier = Session::get('panier', []);
-       
+        $panier = json_decode($request->cookie('panier', '[]'), true);
+
         if(count($panier) > 0){
             $payer = new Payer();
             $payer->setPaymentMethod('paypal');
@@ -81,18 +82,18 @@ class OrderSummaryController extends Controller
             $commande->save();
 
             foreach ($panier as $panierItem) {
-                $total += $panierItem['produit']->prix * $panierItem['quantite'];
+                $total += $panierItem['prix'] * $panierItem['quantite'];
                 $item = new Item();
-                $item->setName($panierItem['produit']->nom)
+                $item->setName($panierItem['nom'])
                     ->setCurrency('EUR')
                     ->setQuantity($panierItem['quantite'])
-                    ->setPrice($panierItem['produit']->prix);
+                    ->setPrice($panierItem['prix']);
                 $items[] = $item;
 
                 // Ajouter les produits dans la table pivot commande_produit
-                $commande->produit()->attach($panierItem['produit']->id, [
+                $commande->produit()->attach($panierItem['id'], [
                     'quantite' => $panierItem['quantite'],
-                    'prix_unitaire' => $panierItem['produit']->prix,
+                    'prix_unitaire' => $panierItem['prix'],
                 ]);
             }
 
@@ -168,7 +169,8 @@ class OrderSummaryController extends Controller
                     $commande->save();
                 }
 
-                Session::forget('panier');
+                Session::forget('panier'); 
+                Cookie::queue(Cookie::forget('panier'));
                 return view('paiement.success', compact('result'));
             }else{
                 return redirect()->route('recap.show')->with('error', 'Paiement échoué, veuillez nous contacter si le problème persiste !');

@@ -23,7 +23,7 @@ class ViewServiceProvider extends ServiceProvider
     {
         // Enregistrer un view composer pour l'en-tête
         View::composer('*', function ($view) {
-            $panier = request()->session()->get('panier', []);
+            $panier = json_decode(request()->cookie('panier', '[]'), true);
             $totalProduits = count($panier);
 
             $view->with('totalProduits', $totalProduits);
