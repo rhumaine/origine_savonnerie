@@ -31,7 +31,6 @@ class PanierController extends Controller
             }
 
             Session::put('panier', $panier);
-            dd(Session::get('panier', []));
             return redirect()->back()->with('success', 'Produit ajouté au panier !');
         }
         
