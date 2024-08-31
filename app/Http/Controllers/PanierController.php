@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use App\Models\Produit;
+use Illuminate\Support\Facades\Log;
 
 class PanierController extends Controller
 {
@@ -49,9 +50,7 @@ class PanierController extends Controller
         foreach ($panier as $item) {
             $total += $item['produit']->prix * $item['quantite'];
         }
-        echo "<pre>";
-print_r( $request->session()->get('panier', []) );
-echo "</pre>";
+
         return view('panier.show',  ['panier' => $panier, 'total' => $total]); 
     }
 
