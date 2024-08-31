@@ -7,191 +7,212 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Redirect;
 use App\Models\Commande;
-use App\Models\CommandeProduit;
-use PayPal\Auth\OAuthTokenCredential;
-use PayPal\Api\Payment;
-use PayPal\Api\PaymentExecution;
-use PayPal\Api\RedirectUrls;
-use PayPal\Api\Transaction;
-use PayPal\Api\Payer;
-use PayPal\Api\Amount;
-use PayPal\Api\Item;
-use PayPal\Api\ItemList;
-use PayPal\Rest\ApiContext;
+use Srmklive\PayPal\Services\PayPal as PayPalClient;
 
 class OrderSummaryController extends Controller
 {
-    private $apiContext;
+    protected $paypal;
 
     public function __construct()
     {
-        $this->apiContext = new ApiContext(
-            new OAuthTokenCredential(
-                config('services.paypal.client_id'),
-                config('services.paypal.secret')
-            )
-        );
-
-        $this->apiContext->setConfig(config('services.paypal.settings'));
+        // Instancier le client PayPal
+        $this->paypal = new PayPalClient();
+        $this->paypal->setApiCredentials(config('paypal')); // Charger les credentials PayPal depuis la config
     }
 
+    /**
+     * Affiche le récapitulatif de la commande.
+     *
+     * @param Request $request
+     * @return \Illuminate\View\View|\Illuminate\Http\RedirectResponse
+     */
     public function show(Request $request)
     {
-        
         $panier = json_decode($request->cookie('panier', '[]'), true);
         $total = 0;
-        if(count($panier) > 0){
-            // Calculer le total de la commande
+
+        if (count($panier) > 0) {
             foreach ($panier as $item) {
                 $total += $item['prix'] * $item['quantite'];
             }
-            
-            return view('recap.show',  ['panier' => $panier, 'total' => $total]);
-        }else{
+
+            return view('recap.show', ['panier' => $panier, 'total' => $total]);
+        } else {
             return Redirect::route('panier.show');
         }
     }
 
-    // Méthode pour gérer le paiement
+    /**
+     * Crée un paiement PayPal.
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function createPayPalPayment(Request $request)
     {
-
         $panier = json_decode($request->cookie('panier', '[]'), true);
 
-        if(count($panier) > 0){
-            $payer = new Payer();
-            $payer->setPaymentMethod('paypal');
-
-            $commande = new Commande();
-            $commande->date_commande = now();
-            $commande->mode_paiement = 'paypal';
-            $commande->user_id = auth()->id();
-
-            $commande->historique_statuts = [
-                [
-                    'statut' => 'En attente de paiement',
-                    'date' => now()
-                ]
-            ];
-
-
-            $items = [];
-            $total = 0;
-            $commande->total = $total;
-            
-            $commande->save();
-
-            foreach ($panier as $panierItem) {
-                $total += $panierItem['prix'] * $panierItem['quantite'];
-                $item = new Item();
-                $item->setName($panierItem['nom'])
-                    ->setCurrency('EUR')
-                    ->setQuantity($panierItem['quantite'])
-                    ->setPrice($panierItem['prix']);
-                $items[] = $item;
-
-                // Ajouter les produits dans la table pivot commande_produit
-                $commande->produit()->attach($panierItem['id'], [
-                    'quantite' => $panierItem['quantite'],
-                    'prix_unitaire' => $panierItem['prix'],
-                ]);
-            }
-
-            $commande->total = $total;
-            $commande->save();
-
-            $itemList = new ItemList();
-            $itemList->setItems($items);
-
-            $amount = new Amount();
-            $amount->setCurrency('EUR')
-            ->setTotal($total);
-
-            $transaction = new Transaction();
-            $transaction->setAmount($amount)
-                ->setItemList($itemList)
-                ->setDescription('paiement de la commande Origine Savonnerie');
-
-            $redirectUrls = new RedirectUrls();
-            $redirectUrls->setReturnUrl(route('paypal.execute',['commande_id' => $commande->id]))
-                    ->setCancelUrl(route('recap.show'));
-
-            $payment = new Payment();
-            $payment->setIntent('sale')
-                ->setPayer($payer)
-                ->setRedirectUrls($redirectUrls)
-                ->setTransactions([$transaction]);
-
-            try {
-               
-                $payment->create($this->apiContext);
-    
-
-                $datePrefix = now()->format('Ymd');
-                $numCommande = $datePrefix . $commande->id;
-                $commande->num_commande = $numCommande;
-                $commande->save();
-
-                return redirect($payment->getApprovalLink());
-            } catch (\Exception $e) {
-                return back()->withErrors('Erreur! ' . $e->getMessage());
-            }
-        }else{
+        if (count($panier) === 0) {
             return Redirect::route('home');
         }
-    }
+
+        $invoiceId = uniqid();
+        $total = 0;
+        $items = [];
+
+        foreach ($panier as $item) {
+            $total += $item['prix'] * $item['quantite'];
+            $items[] = [
+                'name' => $item['nom'],
+                'price' => $item['prix'],
+                'qty' => $item['quantite'],
+                'currency' => 'EUR'
+            ];
+        }
+
+        // Créer la commande dans la base de données
+        $commande = new Commande();
+        $commande->date_commande = now();
+        $commande->mode_paiement = 'paypal';
+        $commande->user_id = auth()->id();
+        $commande->total = $total;
+        $commande->historique_statuts = [
+            [
+                'statut' => 'En attente de paiement',
+                'date' => now()
+            ]
+        ];
+        $commande->save();
+
+        foreach ($panier as $panierItem) {
+            $commande->produit()->attach($panierItem['id'], [
+                'quantite' => $panierItem['quantite'],
+                'prix_unitaire' => $panierItem['prix'],
+            ]);
+        }
+
+        $provider = new PayPalClient;
+        $provider->setApiCredentials(config('paypal'));
+        $paypalToken = $provider->getAccessToken();
 
 
-    // Méthode pour gérer le paiement
-    public function executePayPalPayment(Request $request)
-    {
-        $paymentId = $request->paymentId;
-        $payment = Payment::get($paymentId, $this->apiContext);
-        $commandeId = $request->get('commande_id');
+        $response = $provider->createOrder([
+            "intent" => "CAPTURE",
+            "application_context" => [
+                "return_url" => route('paypal.payment.success', ['commande_id' => $commande->id]),
+                "cancel_url" => route('paypal.payment.cancel'),
+            ],
+           "purchase_units" => [
+                [
+                    "reference_id" => "default",
+                    "amount" => [
+                        "currency_code" => "EUR",
+                        "value" => $total,
+                    ],
+                    "shipping" => [
+                        "name" => [
+                            "full_name" => $request->user()->name." ".$request->user()->prenom, // Nom du destinataire
+                        ],
+                        "address" => [
+                            "address_line_1" => $request->user()->address, // Adresse ligne 1
+                            "address_line_2" => "", // Adresse ligne 2 (facultatif)
+                            "admin_area_2" => $request->user()->ville, // Ville
+                            "admin_area_1" => "", // État/Région
+                            "postal_code" => $request->user()->code_postal, // Code postal
+                            "country_code" => "FR", // Code du pays
+                        ],
+                    ],
+                ],
+            ],
+        ]);
 
-        $execution = new PaymentExecution();
-        $execution->setPayerId($request->PayerID);
+        $datePrefix = now()->format('Ymd');
+        $numCommande = $datePrefix . $commande->id;
+        $commande->num_commande = $numCommande;
+        $commande->save();
 
-        try {
-            $result = $payment->execute($execution, $this->apiContext);
-
-            if($result->state == "approved"){
-
-                // update commande en apprrouvé
-                $commande = Commande::find($commandeId);
-                if ($commande) {
-                    
-                    $historique = $commande->historique_statuts ?? [];
-                    $historique[] = [
-                        'statut' => 'Approuvé',
-                        'date' => now()
-                    ]; 
-                    $commande->historique_statuts = $historique;
-                    $commande->save();
+        
+        if (isset($response['id']) && $response['id'] != null) {
+            foreach ($response['links'] as $links) {
+                if ($links['rel'] == 'approve') {
+                    return redirect()->away($links['href']);
                 }
-
-                Session::forget('panier'); 
-                Cookie::queue(Cookie::forget('panier'));
-                return view('paiement.success', compact('result'));
-            }else{
-                return redirect()->route('recap.show')->with('error', 'Paiement échoué, veuillez nous contacter si le problème persiste !');
             }
-
-        } catch (\Exception $e) {
-            return back()->withErrors('Error! ' . $e->getMessage());
+            return redirect()->route('cancel.payment')->with('error', 'Something went wrong.');
+        } else {
+            return redirect()->route('create.payment')->with('error', $response['message'] ?? 'Something went wrong.');
         }
     }
 
-    public function commandeShow(Request $request, $id){
+    /**
+     * Exécute le paiement PayPal après redirection.
+     *
+     * @param Request $request
+     * @return \Illuminate\View\View|\Illuminate\Http\RedirectResponse
+     */
+    public function paymentSuccess(Request $request)
+    {
+        
+        $provider = new PayPalClient;
+        $provider->setApiCredentials(config('paypal'));
+        $provider->getAccessToken();
+        $response = $provider->capturePaymentOrder($request['token']);
+
+        $commandeId = $request->get('commande_id');
+
+        if (isset($response['status']) && $response['status'] == 'COMPLETED') {
+            $commande = Commande::find($commandeId);
+
+            if ($commande) {
+                $historique = $commande->historique_statuts ?? [];
+                $historique[] = [
+                    'statut' => 'Approuvé',
+                    'date' => now()
+                ];
+                $commande->historique_statuts = $historique;
+                $commande->save();
+
+                Session::forget('panier');
+                Cookie::queue(Cookie::forget('panier'));
+
+                return view('paiement.success', ['result' => $response, 'commande_id' => $commandeId]);
+            } else {
+                return redirect()->route('recap.show')->with('error', 'Commande non trouvée.');
+            }
+        } else {
+            return redirect()->route('recap.show')->with('error', 'Paiement échoué, veuillez nous contacter si le problème persiste !');
+        }
+    }
+
+    /**
+     * Gère l'annulation du paiement PayPal.
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function paymentCancel()
+    {
+        return redirect()->route('recap.show')->with('error', 'Paiement annulé.');
+    }
+
+
+    /**
+     * Affiche les détails d'une commande.
+     *
+     * @param Request $request
+     * @param int $id
+     * @return \Illuminate\View\View|\Illuminate\Http\RedirectResponse
+     */
+    public function commandeShow(Request $request, $id)
+    {
         $commande = Commande::findOrFail($id);
         $user = $commande->user->id;
 
-        if($user === $request->user()->id || $request->user()->role === "admin"){
+        if ($user === $request->user()->id || $request->user()->role === "admin") {
             return view('commandes.show', [
                 'user' => $user,
                 'commande' => $commande,
             ]);
-        }else{
+        } else {
             return redirect()->route('home');
         }
     }
