@@ -34,7 +34,8 @@ class PanierController extends Controller
                 ];
             }
     
-            Cookie::queue('panier', json_encode($panier), 120); // Expiration en minutes
+            Cookie::queue(Cookie::make('panier', json_encode($panier), 120)); // Expiration en minutes
+
     
             return redirect()->back()->with('success', 'Produit ajouté au panier !');
         }
