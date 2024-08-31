@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use App\Models\Produit;
-use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Cookie;
 
 class PanierController extends Controller
 {
@@ -17,7 +17,7 @@ class PanierController extends Controller
         ]);
 
         $quantite = $request->input('quantite', 1);
-        $panier = $request->session()->get('panier', []);
+        $panier = json_decode($request->cookie('panier', '[]'), true);
         
         $produit = Produit::find($id);
 
@@ -31,8 +31,7 @@ class PanierController extends Controller
                 ];
             }
 
-            $request->session()->put('panier', $panier);
-            $request->session()->regenerate();
+            Cookie::queue('panier', json_encode($panier), 120); // Expiration en minutes
 
             return redirect()->back()->with('success', 'Produit ajouté au panier !');
         }
@@ -43,7 +42,7 @@ class PanierController extends Controller
 
     public function show(Request $request)
     {
-        $panier = $request->session()->get('panier', []);
+        $panier = json_decode($request->cookie('panier', '[]'), true);
         $total = 0;
 
         // Calculer le total de la commande
