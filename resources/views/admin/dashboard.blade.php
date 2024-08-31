@@ -78,7 +78,7 @@
                                             $dernierStatut = !empty($historique) ? end($historique)['statut'] : 'Aucun statut disponible';
                                         @endphp
                                         <p class="text-sm text-gray-500 dark:text-gray-300">
-                                            Statut : <span id="statusDisplay" class="font-semibold">{{ $dernierStatut }}</span>
+                                            Statut : <span id="statusDisplay-{{ $c->id }}" class="font-semibold">{{ $dernierStatut }}</span>
                                         </p>
                                         <p class="text-sm text-gray-500 dark:text-gray-300">
                                             Prix : {{ number_format($c->total, 2) }} €
@@ -139,7 +139,7 @@
                     })
                     .then(response => response.json())
                     .then(data => {
-                        document.getElementById('statusDisplay').textContent = status;
+                        document.getElementById('statusDisplay-'+commandeId).textContent = status;
                     })
                     .catch(error => console.error('Error:', error));
                 });
