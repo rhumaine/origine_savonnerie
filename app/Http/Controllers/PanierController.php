@@ -16,7 +16,7 @@ class PanierController extends Controller
         ]);
 
         $quantite = $request->input('quantite', 1);
-        $panier = $request->session()->get('panier');
+        $panier = $request->session()->get('panier', []);
         
         $produit = Produit::find($id);
 
@@ -40,7 +40,7 @@ class PanierController extends Controller
 
     public function show(Request $request)
     {
-        $panier = $request->session()->get('panier');
+        $panier = $request->session()->get('panier', []);
         $total = 0;
 
         // Calculer le total de la commande
