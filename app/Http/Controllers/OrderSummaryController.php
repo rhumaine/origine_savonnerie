@@ -123,6 +123,7 @@ class OrderSummaryController extends Controller
                 ->setTransactions([$transaction]);
 
             try {
+               
                 $payment->create($this->apiContext);
     
 
