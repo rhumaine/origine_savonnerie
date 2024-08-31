@@ -17,6 +17,7 @@ class PanierController extends Controller
 
         $quantite = $request->input('quantite', 1);
         $panier = Session::get('panier', []);
+        dd($panier);
         $produit = Produit::find($id);
 
         if ($produit) {
