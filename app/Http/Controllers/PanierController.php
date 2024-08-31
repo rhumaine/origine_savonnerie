@@ -42,7 +42,7 @@ class PanierController extends Controller
     {
         $panier = Session::get('panier', []);
         $total = 0;
-
+        dd($request->session());
         // Calculer le total de la commande
         foreach ($panier as $item) {
             $total += $item['produit']->prix * $item['quantite'];
