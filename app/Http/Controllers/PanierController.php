@@ -16,7 +16,7 @@ class PanierController extends Controller
         ]);
 
         $quantite = $request->input('quantite', 1);
-        $panier = Session::get('panier', []);
+        $panier = $request->session()->get('panier');
         
         $produit = Produit::find($id);
 
@@ -30,7 +30,7 @@ class PanierController extends Controller
                 ];
             }
 
-            Session::put('panier', $panier);
+            $request->session()->put('panier', $panier);
             return redirect()->back()->with('success', 'Produit ajouté au panier !');
         }
         
@@ -40,20 +40,20 @@ class PanierController extends Controller
 
     public function show(Request $request)
     {
-        $panier = Session::get('panier', []);
+        $panier = $request->session()->get('panier');
         $total = 0;
-        dd($request->session());
+
         // Calculer le total de la commande
         foreach ($panier as $item) {
             $total += $item['produit']->prix * $item['quantite'];
         }
-        
+        dd($panier);
         return view('panier.show',  ['panier' => $panier, 'total' => $total]); 
     }
 
     public function vider()
     {
-        Session::forget('panier');
+        $request->session()->forget('panier');
         return redirect()->route('panier.show')->with('success', 'Le panier a été vidé.');
     }
 }
