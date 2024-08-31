@@ -11,4 +11,7 @@ export default defineConfig({
             refresh: true,
         }),
     ],
+    server: {
+        https: true, // Assurez-vous que Vite utilise HTTPS en développement
+      },
 });
