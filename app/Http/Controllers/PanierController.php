@@ -17,7 +17,7 @@ class PanierController extends Controller
 
         $quantite = $request->input('quantite', 1);
         $panier = Session::get('panier', []);
-        dd($panier);
+        
         $produit = Produit::find($id);
 
         if ($produit) {
@@ -31,7 +31,7 @@ class PanierController extends Controller
             }
 
             Session::put('panier', $panier);
-            
+            dd($panier);
             return redirect()->back()->with('success', 'Produit ajouté au panier !');
         }
         
