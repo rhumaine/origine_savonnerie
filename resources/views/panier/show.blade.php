@@ -31,10 +31,10 @@
                         <tbody>
                             @foreach($panier as $id => $item)
                                 <tr>
-                                    <td>{{ $item['produit']->nom }}</td>
-                                    <td>{{ number_format($item['produit']->prix, 2, ',', ' ') }} €</td>
-                                    <td>{{ $item['quantite'] }}</td>
-                                    <td>{{ number_format($item['produit']->prix * $item['quantite'], 2, ',', ' ') }} €</td>
+                                    <td>{{ $item['nom'] ?? 'Nom non disponible' }}</td>
+                                    <td>{{ isset($item['prix']) ? number_format($item['prix'], 2, ',', ' ') : 'Prix non disponible' }} €</td>
+                                    <td>{{ $item['quantite'] ?? 'Quantité non disponible' }}</td>
+                                    <td>{{ isset($item['prix']) && isset($item['quantite']) ? number_format($item['prix'] * $item['quantite'], 2, ',', ' ') : 'Total non disponible' }} €</td>
                                 </tr>
                             @endforeach
                             
@@ -44,7 +44,6 @@
                     <p>Votre panier est vide.</p>
                 @endif
             </div>
-
             <!-- Résumé et actions -->
             <div class="summary-container">
                 <h2>Total de la commande</h2>

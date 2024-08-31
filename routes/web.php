@@ -48,8 +48,9 @@ Route::get('/commande/{id}', [OrderSummaryController::class, 'commandeShow'])->m
 
 Route::get('/checkout/summary', [OrderSummaryController::class, 'show'])->name('recap.show');
 Route::get('/checkout/paypal/payment', [OrderSummaryController::class, 'createPayPalPayment'])->name('paypal.payment');
-Route::get('/checkout/paypal/execute', [OrderSummaryController::class, 'executePayPalPayment'])->name('paypal.execute');
-
+//Route::get('/checkout/paypal/execute', [OrderSummaryController::class, 'executePayPalPayment'])->name('paypal.execute');
+Route::get('/checkout/paypal/success', [OrderSummaryController::class, 'paymentSuccess'])->name('paypal.payment.success');
+Route::get('/checkout/paypal/cancel', [OrderSummaryController::class, 'paymentCancel'])->name('paypal.payment.cancel');
 // FIN PRODUITS
 
 
