@@ -6,10 +6,7 @@
     "routes": [
         { "src": "/build/(.*)", "dest": "/public/build/" },
         { "src": "/build/images/(.*)", "dest": "/public/images/" },
-        {
-            "src": "/images/(.*)",
-            "dest": "public/$1/$2"
-        },
+        { "src": "/images/(.*)", "dest": "public/$1/$2"},
         { "src": "/(.*)", "dest": "/api/index.php" }
     ],
     "env": {
@@ -27,6 +24,6 @@
 
         "CACHE_DRIVER": "array",
         "LOG_CHANNEL": "stderr",
-        "SESSION_DRIVER": "array"
+        "SESSION_DRIVER": "cookie"
     }
 }
