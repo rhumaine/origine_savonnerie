@@ -41,7 +41,6 @@ class PanierController extends Controller
     public function show(Request $request)
     {
         $panier = Session::get('panier', []);
-        dd(Session::get('panier', []));
         $total = 0;
 
         // Calculer le total de la commande
