@@ -6,6 +6,10 @@
     "routes": [
         { "src": "/build/(.*)", "dest": "/public/build/" },
         { "src": "/build/images/(.*)", "dest": "/public/images/" },
+        {
+            "src": "/images/(.*)",
+            "dest": "public/$1/$2"
+        },
         { "src": "/(.*)", "dest": "/api/index.php" }
     ],
     "env": {
