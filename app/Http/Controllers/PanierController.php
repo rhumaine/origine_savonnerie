@@ -29,22 +29,10 @@ class PanierController extends Controller
                     'quantite' => $quantite,
                 ];
             }
-echo "<pre>";
-print_r( $panier );
-echo "</pre>";
-
-            
-echo "<pre>";
-print_r( "------------------------------------------------" );
-echo "</pre>";
 
             $request->session()->put('panier', $panier);
 
-            
-echo "<pre>";
-print_r( $request->session()->get('panier', []) );
-echo "</pre>";
-dd('ok');
+\Log::info('Panier sauvegardé dans la session:', $request->session()->get('panier'));
             return redirect()->back()->with('success', 'Produit ajouté au panier !');
         }
         
