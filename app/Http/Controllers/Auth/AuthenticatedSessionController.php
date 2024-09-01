@@ -31,11 +31,13 @@ class AuthenticatedSessionController extends Controller
         // Condition pour déterminer où rediriger après la connexion
         if ($request->has('redirect_vers_recap')) {
             return redirect()->route('recap.show');
-        }elseif (condition) {
-            # code...
+        }else{
+            if($request->user()->role === "admin"){
+                return redirect()->intended(route('admin.dashboard', absolute: false));
+            }else{
+                return redirect()->intended(route('dashboard', absolute: false));
+            }
         }
-
-        return redirect()->intended(route('dashboard', absolute: false));
     }
 
     /**
