@@ -15,9 +15,9 @@
 
     @if(count($panier) > 0)
     
-        <div class="containerPanier">
+        <div class="containerPanier flex-column flex-lg-row">
             <!-- Tableau des produits dans le panier -->
-            <div class="table-container">
+            <div class="table-container mb-2 me-0 mb-lg-0 me-lg-4 bg-white p-2 rounded-lg shadow flex-shrink-0">
                 @if(count($panier) > 0)
                     <table>
                         <thead>
@@ -31,7 +31,7 @@
                         <tbody>
                             @foreach($panier as $id => $item)
                                 <tr>
-                                    <td>{{ $item['nom'] ?? 'Nom non disponible' }}</td>
+                                    <td class="ps-0 ps-sm-4">{{ $item['nom'] ?? 'Nom non disponible' }}</td>
                                     <td>{{ isset($item['prix']) ? number_format($item['prix'], 2, ',', ' ') : 'Prix non disponible' }} €</td>
                                     <td>{{ $item['quantite'] ?? 'Quantité non disponible' }}</td>
                                     <td>{{ isset($item['prix']) && isset($item['quantite']) ? number_format($item['prix'] * $item['quantite'], 2, ',', ' ') : 'Total non disponible' }} €</td>
@@ -45,7 +45,7 @@
                 @endif
             </div>
             <!-- Résumé et actions -->
-            <div class="summary-container">
+            <div class="summary-container  bg-white p-2 rounded-lg shadow flex-shrink-0">
                 <h2>Total de la commande</h2>
                 <p class="total mt-2">{{ number_format($total, 2, ',', ' ') }} €</p>
 
@@ -57,7 +57,7 @@
                     <a href="#" class="btn mt-3" data-bs-toggle="modal" data-bs-target="#exampleModal">Valider le panier</a>
                 @endauth
                 <!-- Bouton pour vider le panier -->
-                <form action="{{ route('panier.vider') }}" method="POST" style="margin-top: 20px;">
+                <form action="{{ route('panier.vider') }}" method="POST" style="margin-top: 10px;">
                     @csrf
                     <button type="submit" class="btn btn-danger">Vider le panier</button>
                 </form>

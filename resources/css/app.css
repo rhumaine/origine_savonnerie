@@ -78,6 +78,10 @@ h3{
     text-decoration: underline; /* Ajoute un soulignement au survol */
 }
 
+.top_custom{
+    top:10px;
+}
+
 /* Styles spécifiques pour le menu centré */
 .center-menu {
     flex: 1; /* Permet au menu centré de prendre tout l'espace disponible */
@@ -198,29 +202,23 @@ button {
     padding: 20px;
 
     .table-container {
-        flex: 2; 
-        margin-right: 20px;
+        flex: 2;
     }
 
     .summary-container {
         flex: 0.5;
-        border: 1px solid #ddd;
-        padding: 20px;
-        border-radius: 8px;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     }
 
     table {
         width: 100%;
-        border-collapse: collapse;
+        border-collapse: collapse;border: 1px solid #ddd;
 
         th {
             background-color: #f4f4f4;
         }
-        th, .containerPanier td {
+        th, td {
             padding: 10px;
-            text-align: left;
-            border: 1px solid #ddd;
+            text-align: left;border: 1px solid #ddd;
         }
     }
 
@@ -384,6 +382,51 @@ footer {
         box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.8);
     }
 }
+.btnCb{
+    padding: 10px 20px;
+    background-color: #00D152;
+    color: white;
+    font-weight: bold;
+    border-radius: 5px;
+    font-size: 20px;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    border: 2px solid transparent;
+  
+  &:hover {
+    filter: brightness(0.95);
+    color: white;
+  }
+}
+.btnPaypal{
+    display: inline-block;
+    padding: 10px 20px; /* Ajustez l'espacement autour du texte */
+    background-color: #ffc439;; /* Couleur de fond de PayPal */
+    text-decoration: none; /* Enlève le soulignement du lien */
+    font-weight: bold; /* Texte en gras */
+    border-radius: 5px; /* Bordures arrondies */
+    transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Effets de transition */
+    border: 2px solid transparent; /* Bordure initiale transparente */
+    
+    
+    &:hover {
+        filter: brightness(0.95);
+    }
+}
+.btnMainPropre{
+    padding: 10px 20px;
+    background-color: #001fd1;
+    color: white;
+    font-weight: bold;
+    border-radius: 5px;
+    font-size: 20px;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    border: 2px solid transparent;
+  
+  &:hover {
+    filter: brightness(0.95);
+    color: white;
+  }
+}
 
 /* DASHBOARD */
 .sidebarDashboard{
@@ -453,21 +496,30 @@ footer {
     }
 }
 
+.commande table td{
+    border: 1px solid #ddd;
+}
+
 @media (max-width: 576px) {
-    .product-info .name {
+    .product-info .name, .panierName {
         font-size: 2.8rem; /* Petite taille pour les très petits écrans */
         white-space: normal;
     }
 }
 
 @media (min-width: 577px) and (max-width: 768px) {
-    .product-info .name {
+    .product-info .name, .panierName {
         font-size: 3.5rem; /* Taille moyenne pour les écrans un peu plus grands */
     }
 }
-
+@media (max-width: 768px) {
+    .sidebarDashboard {
+        margin-right: 0px;
+        margin-bottom: 10px;
+    }
+}
 @media (min-width: 769px) {
-    .product-info .name {
+    .product-info .name, .panierName {
         font-size: 4rem; /* Taille plus grande pour les écrans moyens à grands */
     }
 }
