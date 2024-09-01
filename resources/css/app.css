@@ -465,7 +465,12 @@ footer {
         font-size: 3.5rem; /* Taille moyenne pour les écrans un peu plus grands */
     }
 }
-
+@media (max-width: 768px) {
+    .sidebarDashboard {
+        margin-right: 0px;
+        margin-bottom: 10px;
+    }
+}
 @media (min-width: 769px) {
     .product-info .name {
         font-size: 4rem; /* Taille plus grande pour les écrans moyens à grands */

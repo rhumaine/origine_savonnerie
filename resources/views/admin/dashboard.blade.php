@@ -8,7 +8,7 @@
     </x-slot>
 
     <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 flex" style="min-height: 50vh;">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 flex flex-column flex-md-row" style="min-height: 50vh;">
             <!-- Sidebar -->
             <div class="sidebarDashboard bg-white p-4 rounded-lg shadow flex-shrink-0">
                 <ul class="space-y-4">

@@ -2,8 +2,8 @@
     <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container">
             <!-- Logo à gauche -->
-            <a class="navbar-brand" href="{{ url('/') }}">
-                <img src="{{ asset('images/logo/logo.png') }}" alt="Logo" class="img-fluid" style="height: 60px; width: auto;">
+            <a class="navbar-brand mx-auto mx-md-0" href="{{ url('/') }}">
+                <img src="{{ asset('images/logo/logo.png') }}" alt="Logo" class="img-fluid" style="height: 120px; width: auto;">
             </a>
 
             <!-- Bouton de basculement pour les petits écrans -->
@@ -28,7 +28,7 @@
                     </ul>
                     
                     <!-- Connexion et inscription -->
-                    <ul class="navbar-nav mx-auto mb-2 mb-lg-0 text-center">
+                    <ul class="navbar-nav mx-auto mx-lg-0 mb-2 mb-lg-0 text-center">
                         <li class="nav-item">
                             <a class="nav-link d-inline-flex align-items-center position-relative p-0" href="{{ route('panier.show') }}">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
