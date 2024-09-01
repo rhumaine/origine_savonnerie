@@ -1,8 +1,8 @@
 <x-app-layout>
-    <div class="container mx-auto p-6">
+    <div class="commande container mx-auto p-6">
         <h1 class="text-2xl font-bold mb-4">Détail de la Commande #{{ $commande->num_commande }}</h1>
 
-        <div class="bg-white shadow-md rounded-lg mb-6 p-4">
+        <div class="bg-white shadow-md rounded-lg mb-3 p-4">
             <h2 class="text-xl font-semibold">Informations de la commande</h2>
             <p>Nom : {{ $commande->user->name }}</p>
             <p>Prenom : {{ $commande->user->prenom }}</p>
@@ -24,7 +24,7 @@
 
         <div class="bg-white shadow-md rounded-lg p-4">
             <h3 class="text-lg font-semibold">Produits commandés</h3>
-                <table>
+                <table class="w-100">
                     <thead>
                         <tr>
                             <th style="width:200px">Nom du produit</th>
@@ -36,7 +36,7 @@
                     <tbody>
                     @foreach($commande->produit as $produit)
                         <tr>
-                            <td>{{ $produit->nom }}</td>
+                            <td class="ps-0 ps-sm-4">{{ $produit->nom }}</td>
                             <td>{{ number_format($produit->pivot->prix_unitaire, 2, ',', ' ') }} €</td>
                             <td>{{ $produit->pivot->quantite }}</td>
                             <td>{{ number_format($produit->pivot->prix_unitaire * $produit->pivot->quantite, 2, ',', ' ') }} €</td>

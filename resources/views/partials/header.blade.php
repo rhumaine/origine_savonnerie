@@ -5,12 +5,16 @@
             <a class="navbar-brand mx-auto mx-md-0" href="{{ url('/') }}">
                 <img src="{{ asset('images/logo/logo.png') }}" alt="Logo" class="img-fluid" style="height: 120px; width: auto;">
             </a>
-
-            <!-- Bouton de basculement pour les petits écrans -->
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
+            <div class="position-relative">
+                <!-- Bouton de basculement pour les petits écrans -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                    <span class="position-absolute top_custom start-100 translate-middle badge rounded-pill bg-danger">
+                        {{ $totalProduits > 0 ? $totalProduits : '0' }}
+                    </span>
+                </button>
+                
+            </div>
             <!-- Menu centré -->
             <div class="collapse navbar-collapse" id="navbarNav">
                 <div class="w-100 d-flex flex-column flex-lg-row align-items-start align-items-lg-center">
