@@ -63,9 +63,6 @@
                 </form>
             </div>
         </div>
-        
-        @include('panier.modalValide')
-
     @else
         <p>Votre panier est vide.</p>
     @endif

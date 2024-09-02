@@ -37,6 +37,8 @@
                     </div>
                 </div>
             </div>
+            
+            @include('panier.modalValide')
 
             @include('partials.footer')
         </div>

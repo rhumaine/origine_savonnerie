@@ -32,3 +32,16 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
+
+document.getElementById("BtnPanier").onclick = function() {
+    if(document.getElementById("cart-sidebar").className == "open"){
+
+        document.getElementById("cart-sidebar").classList = "close";
+    }else{
+        document.getElementById("cart-sidebar").className = "open";
+    }
+}
+
+document.getElementById("close-cart").onclick = function() {
+    document.getElementById("cart-sidebar").classList = "close";
+}
