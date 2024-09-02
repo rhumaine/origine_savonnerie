@@ -26,7 +26,17 @@ class ViewServiceProvider extends ServiceProvider
             $panier = json_decode(request()->cookie('panier', '[]'), true);
             $totalProduits = count($panier);
 
-            $view->with('totalProduits', $totalProduits);
+            $total = 0;
+  
+            // Calculer le total de la commande
+            foreach ($panier as $item) {
+                // Assurez-vous que les clés 'prix' et 'quantite' existent
+                if (isset($item['prix']) && isset($item['quantite'])) {
+                    $total += $item['prix'] * $item['quantite'];
+                }
+            } 
+
+            $view->with(['totalProduits'=> $totalProduits, 'panier' =>$panier, 'totalPrix' => $total]);
         });
     }
 }
