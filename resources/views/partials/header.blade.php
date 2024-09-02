@@ -34,7 +34,11 @@
                     <!-- Connexion et inscription -->
                     <ul class="navbar-nav mx-auto mx-lg-0 mb-2 mb-lg-0 text-center">
                         <li class="nav-item">
-                            <a class="nav-link d-inline-flex align-items-center position-relative p-0" href="{{ route('panier.show') }}">
+                            @if (Route::is('panier.show'))
+                                <a class="nav-link d-inline-flex align-items-center position-relative p-0" href="{{ route('panier.show')}}">
+                            @else
+                                <a id="BtnPanier" class="nav-link d-inline-flex align-items-center position-relative p-0" href="#">
+                            @endif
                                 <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
                                     <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
                                 </svg>
@@ -66,3 +70,37 @@
         </div>
     </nav>
 </header>
+
+<div id="cart-sidebar" class="close">
+    <a href="javascript:void(0)" id="close-cart" style="position: absolute; top: 20px; right: 25px; font-size: 36px;">&times;</a>
+    
+    <div class="mx-auto">
+        <p class="text-center">Total</p>
+        <p class="text-center">{{ $totalPrix }} €</p>
+        <hr>
+
+        @foreach ($panier as $p)
+            <div class="pb-2">
+                <p>{{ $p['nom'] }}</p>
+                <p class="ps-5">Quantité : {{ $p['quantite'] }}</p>
+                <p class="ps-5">Sous-total : {{ $p['prix'] * $p['quantite'] }} €</p>
+            </div>
+            @if (!$loop->last)
+                <hr>
+            @endif
+        @endforeach
+        <div class="containerPanier flex flex-column p-2">
+            @auth
+                <!-- Bouton pour passer à la caisse -->
+                <a href="{{ route('recap.show') }}" class="btn mt-3">Valider le panier</a>
+            @else
+            <!-- Bouton pour passer à la caisse -->
+                <a href="#" class="btn mt-3" data-bs-toggle="modal" data-bs-target="#exampleModal">Valider le panier</a>
+            @endauth
+            <form action="{{ route('panier.vider') }}" method="POST" style="margin-top: 10px;">
+                @csrf
+                <button type="submit" class="btn btn-danger">Vider le panier</button>
+            </form>
+        </div>
+    </div>
+</div>
