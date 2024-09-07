@@ -16,6 +16,7 @@ class PanierController extends Controller
             'quantite' => 'required|integer|min:1',
         ]);
     
+        dd('la');
         $quantite = $request->input('quantite', 1);
         $panier = json_decode($request->cookie('panier', '[]'), true);
     
