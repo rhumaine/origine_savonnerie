@@ -11,8 +11,6 @@ class PanierController extends Controller
 {
     public function ajouter(Request $request, $id)
     {
-
-        dd($request);
         $request->validate([
             'quantite' => 'required|integer|min:1',
         ]);

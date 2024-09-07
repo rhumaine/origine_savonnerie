@@ -13,7 +13,7 @@
         "APP_ENV": "production",
         "APP_DEBUG": "true",
         "APP_URL": "https://origine-savonnerie.vercel.app",
-        "APP_KEY": "base64:cYJIgpx3+GlXnRPHNYcqp8CUT5SS/n5/cRA5kKQxcho=",
+        "APP_KEY": "base64:SOD4PEcVMZjmlBXCC93omfpjWo73KPyZX4y+cD8Dn0Y=",
 
         "APP_CONFIG_CACHE": "/tmp/config.php",
         "APP_EVENTS_CACHE": "/tmp/events.php",
