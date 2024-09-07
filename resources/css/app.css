@@ -4,7 +4,6 @@
 
 
 body{
-    /*background-color: #e4d1cb;*/
     background-color: #c8e1c8;
 }
 .page-wrapper {
@@ -33,6 +32,19 @@ h3{
     margin-top: 15px;
     margin-bottom: 5px;
 }
+
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); 
+    z-index: 600;
+}
+
+
 .legale ul  {
     margin: 0;
     padding: 0;
@@ -52,46 +64,46 @@ h3{
 }
 /* NAVIGATION */
 #navbarNav .navbar {
-    display: flex; /* Utilise Flexbox pour positionner les éléments */
-    justify-content: space-between; /* Espace entre les menus pour alignement */
-    align-items: center; /* Centre verticalement les éléments */
-    padding: 10px 20px; /* Espacement autour de la navbar */
+    display: flex; 
+    justify-content: space-between;
+    align-items: center; 
+    padding: 10px 20px; 
     width: 100%;
 }
 
 .navbar-nav {
-    list-style: none; /* Supprime les puces des listes */
+    list-style: none;
     padding: 0;
     margin: 0;
-    display: flex; /* Affiche les éléments en ligne */
+    display: flex; 
 }
 
 .nav-item {
-    margin: 0 15px; /* Espacement entre les éléments de la liste */
+    margin: 0 15px; 
 }
 
 .nav-link {
-    text-decoration: none; /* Supprime le soulignement des liens */
-    font-weight: bold; /* Rend le texte des liens en gras */
+    text-decoration: none;
+    font-weight: bold;
 }
 
 .nav-link:hover {
-    text-decoration: underline; /* Ajoute un soulignement au survol */
+    text-decoration: underline;
 }
 
 .top_custom{
     top:10px;
 }
 
-/* Styles spécifiques pour le menu centré */
+
 .center-menu {
-    flex: 1; /* Permet au menu centré de prendre tout l'espace disponible */
-    justify-content: center; /* Centre les éléments de la liste */
+    flex: 1; 
+    justify-content: center; 
 }
 
-/* Styles spécifiques pour le menu à droite */
+
 .right-menu {
-    margin-left: auto; /* Pousse le menu à l'extrême droite */
+    margin-left: auto; 
 }
 
 .logo{
@@ -107,13 +119,13 @@ h3{
     top: 0;
     width: 100%;
     height: 70px;
-    z-index: 999;
+    z-index: 200;
     background-color: #8fc18f;
     transition: all 0.9s ease;
     transform: translateY(0);
 }
 
-/* Éventuellement, ajouter une ombre portée pour plus de contraste */
+
 .navbar-fixed-shadow {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
@@ -127,22 +139,22 @@ a:hover{
 }
 
 .image-container {
-    overflow: hidden; /* Masque toute partie de l'image qui dépasse */
+    overflow: hidden;
 }
 
 .zoomable-image {
-    transition: transform 0.3s ease; /* Transition douce pour le zoom */
-    width: 100%; /* Assure que l'image remplit le conteneur */
-    height: auto; /* Maintient le ratio d'aspect de l'image */
+    transition: transform 0.3s ease; 
+    width: 100%;
+    height: auto;
 }
 
 .zoomable-image:hover {
-    transform: scale(1.1); /* Applique un zoom de 10% à l'image */
+    transform: scale(1.1);
 }
 
 
 #cart-sidebar {
-    width: 300px; /* La largeur que vous voulez pour votre panier */
+    width: 300px; 
     height: 100%;
     position: fixed;
     top: 0;
@@ -158,8 +170,8 @@ a:hover{
     padding: 60px 20px;
 }
 #cart-sidebar.close {
-    transform: translateX(100%); /* Déplacez-le en dehors de l'écran */
-    opacity: 0; /* Réduit l'opacité à zéro */
+    transform: translateX(100%);
+    opacity: 0;
 }
 
 
@@ -448,13 +460,13 @@ footer {
 }
 .btnPaypal{
     display: inline-block;
-    padding: 10px 20px; /* Ajustez l'espacement autour du texte */
-    background-color: #ffc439;; /* Couleur de fond de PayPal */
-    text-decoration: none; /* Enlève le soulignement du lien */
-    font-weight: bold; /* Texte en gras */
-    border-radius: 5px; /* Bordures arrondies */
-    transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Effets de transition */
-    border: 2px solid transparent; /* Bordure initiale transparente */
+    padding: 10px 20px;
+    background-color: #ffc439;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease; 
+    border: 2px solid transparent;
     
     
     &:hover {
@@ -529,7 +541,7 @@ footer {
         padding: 16px;
     }
     .buttonContainer{
-        flex: 2; /* Equivalent to w-1/4 */
+        flex: 2;
         display: flex;
         align-items: center;
         justify-content: flex-end;
@@ -551,14 +563,14 @@ footer {
 
 @media (max-width: 576px) {
     .product-info .name, .panierName {
-        font-size: 2.8rem; /* Petite taille pour les très petits écrans */
+        font-size: 2.8rem; 
         white-space: normal;
     }
 }
 
 @media (min-width: 577px) and (max-width: 768px) {
     .product-info .name, .panierName {
-        font-size: 3.5rem; /* Taille moyenne pour les écrans un peu plus grands */
+        font-size: 3.5rem; 
     }
 }
 @media (max-width: 768px) {
@@ -570,7 +582,7 @@ footer {
 }
 @media (min-width: 769px) {
     .product-info .name, .panierName {
-        font-size: 4rem; /* Taille plus grande pour les écrans moyens à grands */
+        font-size: 4rem;
     }
 }
 
