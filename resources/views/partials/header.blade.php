@@ -70,5 +70,5 @@
         </div>
     </nav>
 </header>
-
+<div class="overlay"></div>
 @include('partials.sideBarPanier')

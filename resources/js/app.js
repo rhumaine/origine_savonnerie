@@ -1,66 +1,74 @@
 import './bootstrap';
-
 import Alpine from 'alpinejs';
 
 window.Alpine = Alpine;
-
 Alpine.start();
 
+// Fonction pour changer la quantité
 window.changeQuantity = function(amount) {
-    const input = document.getElementById('quantite');
-    if (input) {
-        const currentValue = parseInt(input.value, 10);
+    const $input = $('#quantite');
+    if ($input.length) {
+        const currentValue = parseInt($input.val(), 10);
         const newValue = currentValue + amount;
         if (newValue >= 1) {
-            input.value = newValue;
-            input.setAttribute('value', newValue); 
+            $input.val(newValue);
+            $input.attr('value', newValue);
         }
     }
 };
 
-// Ajouter les écouteurs d'événements après le chargement du DOM
-document.addEventListener('DOMContentLoaded', () => {
-    const minusButton = document.querySelector('.quantity__button[name="minus"]');
-    const plusButton = document.querySelector('.quantity__button[name="plus"]');
 
-    if (minusButton) {
-        minusButton.addEventListener('click', () => changeQuantity(-1));
+$(document).ready(function() {
+    const $minusButton = $('.quantity__button[name="minus"]');
+    const $plusButton = $('.quantity__button[name="plus"]');
+
+    if ($minusButton.length) {
+        $minusButton.on('click', function() {
+            changeQuantity(-1);
+        });
     }
 
-    if (plusButton) {
-        plusButton.addEventListener('click', () => changeQuantity(1));
+    if ($plusButton.length) {
+        $plusButton.on('click', function() {
+            changeQuantity(1);
+        });
     }
 
-
-    //Navbar
-    const navbar = document.getElementById('navbar');
-    const logo = document.getElementById('logo');
+    // Navbar
+    const $navbar = $('#navbar');
+    const $logo = $('#logo');
     const scrollThreshold = 150; // Nombre de pixels à défiler avant de fixer la barre de navigation
-    const heightPage = document.documentElement.scrollHeight;
-    const tailleMain = document.getElementsByClassName('main')[0].clientHeight;
+    const $tailleMain = $('.main').first().outerHeight();
 
-    window.addEventListener('scroll', function() {
-        
-        if (window.scrollY > scrollThreshold && tailleMain > 730) {
-            navbar.classList.add('navbar-fixed', 'navbar-fixed-shadow');
-            logo.className = 'logo-fixed';
+    $(window).on('scroll', function() {
+        if ($(window).scrollTop() > scrollThreshold && $tailleMain > 1000) {
+            $navbar.addClass('navbar-fixed navbar-fixed-shadow');
+            $logo.removeClass('logo').addClass('logo-fixed');
         } else {
-            navbar.classList.remove('navbar-fixed', 'navbar-fixed-shadow');
-            logo.className = 'logo';
+            $navbar.removeClass('navbar-fixed navbar-fixed-shadow');
+            $logo.removeClass('logo-fixed').addClass('logo');
         }
     });
+
+    // Gestion du panier
+    $('#BtnPanier').on('click', function() {
+        const $cartSidebar = $('#cart-sidebar');
+        if ($cartSidebar.hasClass('open')) {
+            $('.overlay').hide();
+            $cartSidebar.removeClass('open').addClass('close');
+        } else {
+            $('.overlay').show();
+            $cartSidebar.removeClass('close').addClass('open');
+        }
+    });
+
+    $('#close-cart').on('click', function() {
+        $('.overlay').hide();
+        $('#cart-sidebar').removeClass('open').addClass('close');
+    });
+
+    $('.overlay').on('click', function() {
+        $('.overlay').hide();
+        $('#cart-sidebar').removeClass('open').addClass('close');
+    });
 });
-
-
-document.getElementById("BtnPanier").onclick = function() {
-    if(document.getElementById("cart-sidebar").className == "open"){
-
-        document.getElementById("cart-sidebar").classList = "close";
-    }else{
-        document.getElementById("cart-sidebar").className = "open";
-    }
-}
-
-document.getElementById("close-cart").onclick = function() {
-    document.getElementById("cart-sidebar").classList = "close";
-}

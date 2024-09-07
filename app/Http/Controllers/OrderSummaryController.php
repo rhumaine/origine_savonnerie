@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Redirect;
 use App\Models\Commande;
+use App\Models\Produit;
 use Srmklive\PayPal\Services\PayPal as PayPalClient;
 
 class OrderSummaryController extends Controller
@@ -30,13 +31,31 @@ class OrderSummaryController extends Controller
     {
         $panier = json_decode($request->cookie('panier', '[]'), true);
         $total = 0;
-
+        $panierMisAJour = [];
         if (count($panier) > 0) {
             foreach ($panier as $item) {
-                $total += $item['prix'] * $item['quantite'];
+                $produit = Produit::find($item['id']);
+
+                if ($produit) {
+                    // Ajouter les informations supplémentaires
+                    $itemAvecInfos = [
+                        'id' => $item['id'],
+                        'nom' => $produit->nom,
+                        'image' => $produit->url_image,
+                        'prix' => $produit->prix,
+                        'quantite' => $item['quantite'],
+                        'sous_total' => $produit->prix * $item['quantite']
+                    ];
+
+                    $total += $itemAvecInfos['sous_total'];
+                    $panierMisAJour[] = $itemAvecInfos;
+                }
             }
 
-            return view('recap.show', ['panier' => $panier, 'total' => $total]);
+            return response()->view('recap.show', [
+                'panierMisAJour' => $panierMisAJour,
+                'total' => $total
+            ]);
         } else {
             return Redirect::route('panier.show');
         }
@@ -215,5 +234,51 @@ class OrderSummaryController extends Controller
         } else {
             return redirect()->route('home');
         }
+    }
+
+    public function createPaiementMainPropre(Request $request)
+    {
+       
+        $panier = json_decode($request->cookie('panier', '[]'), true);
+
+        if (count($panier) === 0) {
+            return Redirect::route('home');
+        }
+
+        $total = 0;
+        foreach ($panier as $item) {
+            $total += $item['prix'] * $item['quantite'];
+        }
+
+        // Créer la commande dans la base de données
+        $commande = new Commande();
+        $commande->date_commande = now();
+        $commande->mode_paiement = 'main propre';
+        $commande->user_id = auth()->id();
+        $commande->total = $total;
+        $commande->historique_statuts = [
+            [
+                'statut' => 'En attente de retrait en main propre',
+                'date' => now()
+            ]
+        ];
+        $commande->save();
+
+        foreach ($panier as $panierItem) {
+            $commande->produit()->attach($panierItem['id'], [
+                'quantite' => $panierItem['quantite'],
+                'prix_unitaire' => $panierItem['prix'],
+            ]);
+        }
+
+        $datePrefix = now()->format('Ymd');
+        $numCommande = $datePrefix . $commande->id;
+        $commande->num_commande = $numCommande;
+        $commande->save();
+
+        Session::forget('panier');
+        Cookie::queue(Cookie::forget('panier'));
+
+        return view('paiement.successMainPropre', ['total' => $total, 'commande_id' => $commande->id]);
     }
 }
