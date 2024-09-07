@@ -37,7 +37,7 @@
                     <p class="taxe">Taxes incluses. Frais d'expédition calculés à l'étape de paiement.</p>
 
                     <form action="{{ route('panier.ajouter', $produit->id) }}" method="POST">
-                    
+                        @csrf
                         <!-- Composant de contrôle de quantité -->
                         <div class="quantity-input">
                             <button class="quantity_button" type="button" onclick="changeQuantity(-1)">-</button>
